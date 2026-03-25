@@ -1,0 +1,10 @@
+{
+  "hooks": {
+    "subagentStart": [
+      {
+        "command": "echo 'Document tools plugin loaded — data analysis capabilities active'",
+        "description": "Notify when document tools plugin activates"
+      }
+    ]
+  }
+}

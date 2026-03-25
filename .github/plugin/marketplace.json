@@ -1,0 +1,19 @@
+{
+  "name": "agent-skills",
+  "owner": {
+    "name": "Chris Ayers",
+    "email": "noreply@chris-ayers.com"
+  },
+  "metadata": {
+    "description": "Agent skills, plugins, and marketplace for GitHub Copilot",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "document-tools",
+      "description": "Document processing toolkit with CSV analysis, report generation, and data profiling",
+      "version": "1.0.0",
+      "source": "./plugins/document-tools"
+    }
+  ]
+}

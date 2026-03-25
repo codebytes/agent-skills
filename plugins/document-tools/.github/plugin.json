@@ -1,0 +1,17 @@
+{
+  "name": "document-tools",
+  "description": "Document processing toolkit with CSV analysis, report generation, and data profiling capabilities",
+  "version": "1.0.0",
+  "author": {
+    "name": "Chris Ayers",
+    "email": "noreply@chris-ayers.com"
+  },
+  "license": "MIT",
+  "keywords": ["data", "csv", "analysis", "reporting"],
+  "agents": [
+    "./agents/data-analyst.agent.md"
+  ],
+  "skills": [
+    "./skills/csv-analysis/"
+  ]
+}
