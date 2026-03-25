@@ -1,56 +1,21 @@
 # Agent Skills, Plugins & Marketplace
 
-A working example of the GitHub Copilot agent extensibility ecosystem — skills, plugins, and a marketplace — in a single repo.
-
-## What's In This Repo
-
-| Component | Location | Description |
-|-----------|----------|-------------|
-| **Marketplace** | `.github/plugin/marketplace.json` | Plugin registry — register with `copilot plugin marketplace add codebytes/agent-skills` |
-| **Plugin** | `plugins/document-tools/` | Installable plugin with a data-analyst agent and CSV analysis skill |
-| **Skills** | `.github/skills/`, `.agents/skills/`, `.gemini/skills/` | Cross-tool skill discovery for Copilot, Codex, and Gemini |
-| **Slides** | `slides/Slides.md` | Marp presentation covering all three concepts |
-
-## Quick Start
-
-```bash
-# Register this repo as a marketplace
-copilot plugin marketplace add codebytes/agent-skills
-
-# Browse available plugins
-copilot plugin marketplace browse agent-skills
-
-# Install the document-tools plugin
-copilot plugin install document-tools@agent-skills
-```
-
-### VS Code
-
-1. Set `chat.plugins.enabled` to `true`
-2. Add `"codebytes/agent-skills"` to `chat.plugins.marketplaces`
-3. Search `@agentPlugins` in Extensions view
-
-## Cross-Tool Compatibility
-
-This repo provides skill discovery paths for multiple AI coding tools:
-
-| Tool | Skill Location | Plugin Manifest |
-|------|---------------|-----------------|
-| **Copilot CLI / VS Code** | `.github/skills/` | `.github/plugin.json` |
-| **Claude Code** | `.claude/skills/` | `.claude-plugin/plugin.json` |
-| **Codex CLI** | `.agents/skills/` | — |
-| **Gemini CLI** | `.gemini/skills/` | — |
-
-Skills use the [Agent Skills](https://agentskills.io) open standard — write once, discovered everywhere.
+This repository contains resources and demos for the talk "Agent Skills, Plugins & Marketplace" by Chris Ayers.
 
 ## Slides
 
-Built with [Marp](https://marp.app/). Preview in VS Code with the [Marp extension](https://marketplace.visualstudio.com/items?itemName=marp-team.marp-vscode), or export:
+The slides for the talk can be found at:\
+[https://chris-ayers.com/agent-skills/](https://chris-ayers.com/agent-skills/)
 
-```bash
-npm install -g @marp-team/marp-cli
-marp --theme-set slides/themes --pdf slides/Slides.md
-```
+## Repository Content
+
+This repository provides a working example of the GitHub Copilot agent extensibility ecosystem — skills, plugins, and a marketplace — all in a single repo. Topics covered include:
+
+- Understanding **Agent Skills** and the `SKILL.md` format
+- Building reusable **Plugins** with agents, skills, and hooks
+- Creating and publishing a **Marketplace** for plugin distribution
+- Cross-tool compatibility across Copilot, Claude Code, Codex CLI, and Gemini CLI
+- The [Agent Skills](https://agentskills.io) open standard — write once, discovered everywhere
 
 ## Resources
 
@@ -59,7 +24,19 @@ marp --theme-set slides/themes --pdf slides/Slides.md
 - [Ken Muse: Creating Agent Plugins](https://www.kenmuse.com/blog/creating-agent-plugins-for-vs-code-and-copilot-cli/)
 - [Agent Skills Standard](https://agentskills.io)
 - [GitHub Changelog: Agent Skills](https://github.blog/changelog/2025-12-18-github-copilot-now-supports-agent-skills/)
+- [copilot-plugins Registry](https://github.com/github/copilot-plugins)
+- [awesome-copilot Marketplace](https://github.com/github/awesome-copilot)
+
+## Connect with Chris Ayers
+
+Feel free to connect with Chris Ayers on social media and visit his blog for more information on Copilot extensibility and other topics:
+
+- BlueSky: [@chris-ayers.com](https://bsky.app/profile/chris-ayers.com)
+- LinkedIn: [chris-l-ayers](https://linkedin.com/in/chris-l-ayers/)
+- Blog: [https://chris-ayers.com/](https://chris-ayers.com/)
+- GitHub: [Codebytes](https://github.com/codebytes)
+- Mastodon: [@Chrisayers@hachyderm.io](https://hachyderm.io/@Chrisayers)
 
 ## License
 
-[MIT](LICENSE)
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.

@@ -2,8 +2,7 @@
 marp: true
 theme: custom-default
 paginate: true
-footer: '@chris-ayers'
-math: mathjax
+footer: '@Chris_L_Ayers - https://chris-ayers.com'
 ---
 
 <!-- Mermaid.js for diagrams -->
@@ -12,15 +11,29 @@ math: mathjax
   mermaid.initialize({ startOnLoad: true });
 </script>
 
+<!-- _footer: 'https://github.com/codebytes/agent-skills' -->
 <!-- _paginate: skip -->
-<!-- _footer: "" -->
-<!-- _class: lead invert -->
 
-# Agent Skills, Plugins & Marketplace
+# <!-- fit --> Agent Skills, Plugins & Marketplace
 
-Extending GitHub Copilot with Reusable AI Capabilities
+## <!-- fit --> Extending GitHub Copilot with Reusable AI Capabilities
 
 <!-- This talk covers the new extensibility model for GitHub Copilot: agent skills for teaching Copilot specialized tasks, plugins for packaging and distributing those capabilities, and marketplaces for discovering and sharing them across teams. -->
+
+---
+
+![bg left:40%](./img/portrait.png)
+
+## Chris Ayers
+
+### Principal Software Engineer<br>Azure CXP AzRel<br>Microsoft
+
+<i class="fa-brands fa-bluesky"></i> BlueSky: [@chris-ayers.com](https://bsky.app/profile/chris-ayers.com)
+<i class="fa-brands fa-linkedin"></i> LinkedIn: - [chris\-l\-ayers](https://linkedin.com/in/chris-l-ayers/)
+<i class="fa fa-window-maximize"></i> Blog: [https://chris-ayers\.com/](https://chris-ayers.com/)
+<i class="fa-brands fa-github"></i> GitHub: [Codebytes](https://github.com/codebytes)
+<i class="fa-brands fa-mastodon"></i> Mastodon: [@Chrisayers@hachyderm.io](https://hachyderm.io/@Chrisayers)
+~~<i class="fa-brands fa-twitter"></i> Twitter: @Chris_L_Ayers~~
 
 ---
 
@@ -300,21 +313,28 @@ my-plugin/
 
 ## Plugins vs Manual Configuration
 
-<!-- _class: columns -->
+<div class="columns">
+<div>
 
-## Manual Config
+### Manual Config
 
 - Scoped to **single repository**
 - Sharing via **copy/paste**
 - Versioned through **git history**
 - Discovery by **searching repos**
 
-## Plugins
+</div>
+<div>
+
+### Plugins
 
 - Works across **any project**
 - Install with **one command**
 - **Marketplace versioning**
 - **Browsable** marketplace registry
+
+</div>
+</div>
 
 <!-- The key advantage is reusability and consistency. Define once, install everywhere. No more drift between team members running different versions of the same configuration. -->
 
@@ -747,50 +767,66 @@ flowchart LR
 
 ---
 
-<!-- _class: columns -->
-
 ## The Ecosystem
 
-## Create
+<div class="columns">
+<div>
+
+### Create
 
 - Write `SKILL.md` files
 - Build `.agent.md` personas
 - Configure `hooks.json`
 - Set up `.mcp.json`
 
-## Distribute
+</div>
+<div>
+
+### Distribute
 
 - Bundle in `plugin.json`
 - Publish to marketplace
 - Version with Git tags
 - Share across teams
 
+</div>
+</div>
+
 <!-- The ecosystem is designed for a create-distribute-consume workflow. Teams create skills and agents, package them as plugins, publish to marketplaces, and consumers install with one command. -->
 
 ---
 
-## Resources
+<div class="columns">
+<div>
 
-- 📖 [GitHub Docs: About CLI Plugins](https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-cli-plugins)
-- 🛒 [awesome-copilot Marketplace](https://github.com/github/awesome-copilot)
-- 🔌 [copilot-plugins Registry](https://github.com/github/copilot-plugins)
-- 📝 [Ken Muse: Creating Agent Plugins](https://www.kenmuse.com/blog/creating-agent-plugins-for-vs-code-and-copilot-cli/)
-- 📢 [GitHub Changelog: Agent Skills](https://github.blog/changelog/2025-12-18-github-copilot-now-supports-agent-skills/)
-- 🔍 [DeepWiki: Plugin System](https://deepwiki.com/github/copilot-cli/5.5-plugin-system-and-skills)
+## Links
+
+- **[GitHub Docs: CLI Plugins](https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-cli-plugins)** - Plugin documentation
+- **[awesome-copilot](https://github.com/github/awesome-copilot)** - Community plugins
+- **[copilot-plugins](https://github.com/github/copilot-plugins)** - Official plugins
+- **[Ken Muse: Agent Plugins](https://www.kenmuse.com/blog/creating-agent-plugins-for-vs-code-and-copilot-cli/)** - Plugin walkthrough
+- **[Agent Skills Standard](https://agentskills.io)** - Open standard
+- **[Agent Skills Changelog](https://github.blog/changelog/2025-12-18-github-copilot-now-supports-agent-skills/)** - Announcement
+
+</div>
+<div>
+
+## Chris Ayers
+
+<i class="fa-brands fa-bluesky"></i> BlueSky: [@chris-ayers.com](https://bsky.app/profile/chris-ayers.com)
+<i class="fa-brands fa-linkedin"></i> LinkedIn: - [chris\-l\-ayers](https://linkedin.com/in/chris-l-ayers/)
+<i class="fa fa-window-maximize"></i> Blog: [https://chris-ayers\.com/](https://chris-ayers.com/)
+<i class="fa-brands fa-github"></i> GitHub: [Codebytes](https://github.com/codebytes)
+<i class="fa-brands fa-mastodon"></i> Mastodon: [@Chrisayers@hachyderm.io](https://hachyderm.io/@Chrisayers)
+~~<i class="fa-brands fa-twitter"></i> Twitter: @Chris_L_Ayers~~
+
+</div>
+</div>
 
 <!-- All the references used for this presentation. The Ken Muse blog post is especially good for a step-by-step walkthrough of creating a plugin from an existing skills repository. -->
 
 ---
 
-<!-- _paginate: skip -->
-<!-- _footer: "" -->
-<!-- _class: lead invert -->
+# Questions?
 
-# <!--fit--> Thank You!
-
-Questions?
-
-<i class="fa-brands fa-github"></i> [codebytes](https://github.com/codebytes)
-<i class="fa-brands fa-linkedin"></i> [chris-ayers](https://linkedin.com/in/chris-ayers)
-<i class="fa-brands fa-mastodon"></i> [@Chrisayers@hachyderm.io](https://hachyderm.io/@Chrisayers)
-<i class="fa-brands fa-bluesky"></i> [@chris-ayers.com](https://bsky.app/profile/chris-ayers.com)
+![bg right](./img/owl.png)
