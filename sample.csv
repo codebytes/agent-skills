@@ -1,0 +1,11 @@
+name,age,salary,department,start_date
+Alice,32,95000,Engineering,2021-03-15
+Bob,28,72000,Marketing,2022-07-01
+Carol,45,120000,Engineering,2018-11-20
+Dave,35,85000,Sales,2020-01-10
+Eve,29,68000,Marketing,2023-02-28
+Frank,41,110000,Engineering,2019-06-15
+Grace,38,92000,Sales,2021-09-01
+Hank,26,61000,Marketing,
+Iris,33,,Engineering,2022-04-12
+Jack,50,135000,Sales,2017-08-30

@@ -57,6 +57,14 @@ footer: '@Chris_L_Ayers - https://chris-ayers.com'
 
 ---
 
+## The Ecosystem at a Glance
+
+![center](./img/ecosystem-layers.drawio.png)
+
+<!-- This layered diagram shows how skills form the foundation, agents build on them with personas, plugins package everything together, and marketplaces make it all discoverable. Each layer adds value on top of the one below. -->
+
+---
+
 ## What Are Agent Skills?
 
 Skills are **folders** containing instructions, scripts, and resources that Copilot **automatically loads** when relevant to your prompt.
@@ -162,6 +170,14 @@ Skills load **on demand** — only when Copilot determines they match the task.
 
 ---
 
+## Write Once, Discovered Everywhere
+
+![center](./img/cross-tool-compatibility.drawio.png)
+
+<!-- The SKILL.md format is the universal layer. Write a skill once, and it's discovered by Copilot CLI, VS Code, Claude Code, Codex CLI, and Gemini CLI. The only difference is where each tool looks for skills. -->
+
+---
+
 ## The Open Agent Skills Standard
 
 The SKILL.md format is an **open standard** ([agentskills.io](https://agentskills.io)) shared across leading AI agent tools:
@@ -234,6 +250,14 @@ my-plugin/
 <!-- _class: lead invert -->
 
 # Plugins
+
+---
+
+## What's Inside a Plugin?
+
+![center](./img/plugin-anatomy.drawio.png)
+
+<!-- Plugins bundle five types of components: agents, skills, hooks, MCP servers, and LSP servers. The plugin.json manifest ties them together. Include multiple tool-specific manifests for maximum cross-tool compatibility. -->
 
 ---
 
@@ -769,30 +793,9 @@ flowchart LR
 
 ## The Ecosystem
 
-<div class="columns">
-<div>
+![center](./img/create-to-consume-flow.drawio.png)
 
-### Create
-
-- Write `SKILL.md` files
-- Build `.agent.md` personas
-- Configure `hooks.json`
-- Set up `.mcp.json`
-
-</div>
-<div>
-
-### Distribute
-
-- Bundle in `plugin.json`
-- Publish to marketplace
-- Version with Git tags
-- Share across teams
-
-</div>
-</div>
-
-<!-- The ecosystem is designed for a create-distribute-consume workflow. Teams create skills and agents, package them as plugins, publish to marketplaces, and consumers install with one command. -->
+<!-- The full lifecycle: Create skills and agents, package them as plugins, publish to marketplaces, and consumers install with one command. Security is built into every step. -->
 
 ---
 
