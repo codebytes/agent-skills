@@ -1,0 +1,6 @@
+flowchart LR
+    T[Plugin Tool Call] --> P{Permission Required?}
+    P -->|Pre-approved| E[Execute]
+    P -->|Standard| A[User Approval]
+    A -->|Approved| E
+    A -->|Denied| D[Blocked]

@@ -1,0 +1,10 @@
+flowchart LR
+    I[Install Plugin] --> R[Plugin Registry]
+    R --> AG[Agents]
+    R --> SK[Skills]
+    R --> HK[Hooks]
+    R --> MC[MCP Servers]
+    AG --> S[Copilot Session]
+    SK --> S
+    HK --> S
+    MC --> S

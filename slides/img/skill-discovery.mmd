@@ -1,0 +1,6 @@
+flowchart LR
+    A[User Prompt] --> B{Relevant?}
+    B -->|Yes| C[Load SKILL.md]
+    B -->|No| D[Skip Skill]
+    C --> E[Use Tools and Resources]
+    E --> F[Return Results]
