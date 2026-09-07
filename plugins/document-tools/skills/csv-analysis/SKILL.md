@@ -1,10 +1,7 @@
 ---
 name: csv-analysis
-description: Analyze CSV files and generate comprehensive statistical reports with data profiling and quality checks
-tools:
-  - powershell
-  - view
-  - create
+description: Analyze CSV files and generate statistical reports with data profiling and quality checks. Use when asked to inspect, summarize, or assess CSV data.
+license: MIT
 ---
 
 ## Instructions
@@ -12,22 +9,14 @@ tools:
 When asked to analyze a CSV file, follow this workflow:
 
 ### Step 1: Read and Profile
-- Use the `view` tool to read the first 50 lines of the CSV
+- Inspect the header and representative rows; read the full file when practical
 - Identify the delimiter (comma, tab, semicolon, pipe)
 - Count total rows and columns
 - Infer column data types (string, integer, float, date, boolean)
 
 ### Step 2: Compute Statistics
-Run a Python script to compute per-column statistics:
-
-```python
-import csv
-import statistics
-from collections import Counter
-
-# Read and analyze the CSV
-# Compute: count, nulls, unique values, min, max, mean, median, std dev
-```
+Use Python's standard `csv`, `statistics`, and `collections` modules to compute
+counts, nulls, unique values, distributions, and numeric summary statistics.
 
 ### Step 3: Quality Assessment
 Check for:

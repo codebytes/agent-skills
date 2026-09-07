@@ -1,6 +1,6 @@
 {
   "name": "document-tools",
-  "description": "Document processing toolkit with CSV analysis, report generation, and data profiling capabilities",
+  "description": "Compact data-analysis plugin used by the Agent Skills talk",
   "version": "1.0.0",
   "author": {
     "name": "Chris Ayers",

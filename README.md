@@ -1,11 +1,25 @@
 # Agent Skills, Plugins & Marketplace
 
-This repository contains resources and demos for the talk "Agent Skills, Plugins & Marketplace" by Chris Ayers.
+This repository is the source for Chris Ayers' talk "Agent Skills, Plugins &
+Marketplace."
 
 ## Slides
 
 The slides for the talk can be found at:\
 [https://chris-ayers.com/agent-skills/](https://chris-ayers.com/agent-skills/)
+
+## What's Here
+
+- `slides/Slides.md` - the Marp presentation source
+- `slides/themes/custom-default.css` - the talk's custom Marp theme
+- `slides/img/` - presentation images and diagrams
+- `plugins/document-tools/` - a compact plugin, agent, skill, hook, and sample
+  dataset used during the live demo
+- `.github/plugin/marketplace.json` - the minimal marketplace shown in the talk
+
+The demo intentionally keeps one canonical `SKILL.md` inside the plugin. It is
+a presentation fixture, not the maintained distribution source for reusable
+skills.
 
 ## Reusable Skills
 
@@ -13,18 +27,13 @@ The maintained, cross-agent skills marketplace now lives in
 [codebytes/skills](https://github.com/codebytes/skills). Browse the published
 catalog at [https://chris-ayers.com/skills/](https://chris-ayers.com/skills/).
 
-This repository remains focused on the talk, its slides, and the compact
-examples used during the presentation.
-
-## Repository Content
-
-This repository provides a working example of the GitHub Copilot agent extensibility ecosystem — skills, plugins, and a marketplace — all in a single repo. Topics covered include:
+## Talk Topics
 
 - Understanding **Agent Skills** and the `SKILL.md` format
 - Building reusable **Plugins** with agents, skills, and hooks
 - Creating and publishing a **Marketplace** for plugin distribution
-- Cross-tool compatibility across Copilot, Claude Code, Codex CLI, and Gemini CLI
-- The [Agent Skills](https://agentskills.io) open standard — write once, discovered everywhere
+- Separating the portable Agent Skills format from host-specific discovery
+- The [Agent Skills](https://agentskills.io) open standard
 
 ## Resources
 

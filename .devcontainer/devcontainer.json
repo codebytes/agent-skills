@@ -23,10 +23,7 @@
 				"markdown.marp.enableHtml": true,
 				"markdown.marp.mathTypesetting": "mathjax",
 				"markdown.marp.themes": [
-					"./slides/themes/custom.css",
-					"./slides/themes/custom-default.css",
-					"./slides/themes/custom-gaia.css",
-					"./slides/themes/custom-uncover.css"
+					"./slides/themes/custom-default.css"
 				]
 			},
 			"extensions": [

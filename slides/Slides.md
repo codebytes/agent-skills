@@ -2,6 +2,7 @@
 marp: true
 theme: custom-default
 paginate: true
+math: mathjax
 footer: '@Chris_L_Ayers - https://chris-ayers.com'
 ---
 
@@ -70,31 +71,32 @@ footer: '@Chris_L_Ayers - https://chris-ayers.com'
 Skills are **folders** containing instructions, scripts, and resources that Copilot **automatically loads** when relevant to your prompt.
 
 - Defined with a `SKILL.md` file
-- Discovered automatically from `.github/skills/`
-- Work across **Copilot CLI**, **VS Code**, and **Coding Agent**
+- Discovered from supported project, personal, or package locations
+- Work across **GitHub Copilot surfaces** and other compatible agents
 - Can include scripts, templates, and reference files
 
-<!-- Agent skills were announced December 2025. They work across all three Copilot surfaces. The key insight is that skills are demand-loaded — Copilot only loads them when it determines they're relevant to the current task. -->
+<!-- Agent skills were announced for Copilot in December 2025 and are now supported across Copilot's cloud agent, code review, CLI, app, and IDE agent modes. The key insight is demand loading: the host reads metadata first, then loads the full instructions only when relevant. -->
 
 ---
 
 ## Skill Directory Structure
 
 ```
-.github/skills/
-└── csv-analysis/
-    ├── SKILL.md          # Instructions & tool config
-    ├── scripts/
-    │   └── analyze.py    # Supporting scripts
-    └── templates/
-        └── report.md     # Output templates
+csv-analysis/
+├── SKILL.md              # Metadata + instructions
+├── scripts/
+│   └── analyze.py        # Optional executable code
+├── references/
+│   └── schema.md         # Optional supporting docs
+└── assets/
+    └── report.md         # Optional templates/resources
 ```
 
 - `SKILL.md` is the entry point — **required**
 - Supporting files are referenced from the instructions
-- Skills can specify which **tools** and **model** to use
+- Put the folder under a supported discovery or package location
 
-<!-- The SKILL.md file is the heart of a skill. It contains the instructions Copilot follows, plus metadata about which tools to use. Supporting files like scripts and templates give the skill concrete capabilities beyond just prompting. -->
+<!-- This is the directory shape standardized by agentskills.io. The standard defines the contents of a skill, not a universal installation path. Supporting scripts, references, and assets give the skill concrete capabilities beyond prompting. -->
 
 ---
 
@@ -103,19 +105,16 @@ Skills are **folders** containing instructions, scripts, and resources that Copi
 ```markdown
 ---
 name: csv-analysis
-description: Analyze CSV files and generate reports
-tools:
-  - powershell
-  - create
-  - view
+description: Analyze CSV files and generate reports. Use when asked to profile or assess CSV data.
+license: MIT
 ---
 
 ## Instructions
 
 When asked to analyze a CSV file:
-1. Read the file with the view tool
+1. Inspect the header and representative rows
 2. Run `scripts/analyze.py` to compute statistics
-3. Generate a report using `templates/report.md`
+3. Generate a report using `assets/report.md`
 
 ## Output Format
 
@@ -123,7 +122,7 @@ Always include: row count, column types,
 summary statistics, and any anomalies found.
 ```
 
-<!-- The frontmatter declares the skill name, description, and which tools it needs. The body contains the actual instructions Copilot will follow. You can be very specific about the workflow and output format. -->
+<!-- The portable specification requires name and description. License, compatibility, metadata, and the experimental allowed-tools field are optional. The body contains the workflow the agent follows. -->
 
 ---
 
@@ -134,7 +133,7 @@ flowchart LR
     A[User Prompt] --> B{Copilot Evaluates<br/>Relevance}
     B -->|Relevant| C[Load SKILL.md]
     B -->|Not Relevant| D[Skip Skill]
-    C --> E[Execute with<br/>Specified Tools]
+    C --> E[Use Tools<br/>& Resources]
     E --> F[Return Results]
 </div>
 
@@ -144,23 +143,21 @@ Skills load **on demand** — only when Copilot determines they match the task.
 
 ---
 
-## Skill Discovery Locations
+## Discovery Is Host-Specific
 
 <!-- _class: small -->
 
-| Location | Tool | Scope |
-|----------|------|-------|
-| `.github/skills/` | Copilot CLI, VS Code | Repository |
-| `.claude/skills/` | Claude Code, Copilot | Repository |
-| `.agents/skills/` | Codex CLI | Repository |
-| `.gemini/skills/` | Gemini CLI | Repository |
-| `~/.copilot/skills/` | Copilot CLI | User-level |
-| `~/.claude/skills/` | Claude Code | User-level |
-| `~/.agents/skills/` | Codex CLI | User-level |
-| `~/.gemini/skills/` | Gemini CLI | User-level |
-| Installed plugins | All | Global |
+| Pattern | Examples | Purpose |
+|---------|----------|---------|
+| Shared project convention | `.agents/skills/` | Portable project skills where supported |
+| GitHub project locations | `.github/skills/`, `.claude/skills/` | Copilot repository skills |
+| Host-specific locations | `.claude/skills/`, `.gemini/skills/` | Native host discovery |
+| Personal locations | `~/.agents/skills/`, `~/.copilot/skills/` | Skills shared across projects |
+| Installers and packages | `gh skill`, plugins, extensions | Put skills where each host expects |
 
-<!-- All five tools — Copilot CLI, VS Code, Claude Code, Codex CLI, and Gemini CLI — support the same SKILL.md format. The difference is WHERE they look for skills. Skills are the most portable piece of the ecosystem. Write once, discovered everywhere. -->
+**The standard defines the skill. The host defines discovery.**
+
+<!-- agentskills.io standardizes the folder and SKILL.md format, but it does not require every host to scan the same path. Keep one canonical source and use an installer, package, generated adapter, or host-supported shared path instead of maintaining hand-copied skill bodies. -->
 
 ---
 
@@ -170,11 +167,21 @@ Skills load **on demand** — only when Copilot determines they match the task.
 
 ---
 
-## Write Once, Discovered Everywhere
+## Write Once, Adapt Per Host
 
-![center](./img/cross-tool-compatibility.drawio.png)
+<div class="mermaid">
+flowchart LR
+    S[Canonical Skill<br/>SKILL.md + Resources]
+    S --> A[Installer, Package,<br/>or Generated Adapter]
+    A --> C[GitHub Copilot]
+    A --> D[Claude Code]
+    A --> O[OpenAI Codex]
+    A --> G[Gemini CLI]
+</div>
 
-<!-- The SKILL.md format is the universal layer. Write a skill once, and it's discovered by Copilot CLI, VS Code, Claude Code, Codex CLI, and Gemini CLI. The only difference is where each tool looks for skills. -->
+**Portable format. Host-specific placement.**
+
+<!-- The SKILL.md format is the portable layer. Keep one source, then let each host discover it through a supported path, installer, plugin, extension, or generated adapter. -->
 
 ---
 
@@ -188,9 +195,10 @@ The SKILL.md format is an **open standard** ([agentskills.io](https://agentskill
 - ✅ **OpenAI Codex CLI** — Skills support, community registries
 - ✅ **Gemini CLI** — Skills + extensions support
 
-All use the same `SKILL.md` file with `name`, `description`, and instructions.
+All share the same core `SKILL.md` format; discovery and packaging remain
+host-specific.
 
-<!-- The agent skills standard at agentskills.io defines a portable format that works across tools. This is huge — you write a skill once, and it works in Copilot, Claude, Codex, Gemini, Cursor, and more. -->
+<!-- The portable layer is the skill directory itself. Hosts may add metadata, permissions, packaging, and installation conventions, so test activation and tool behavior in every target host. -->
 
 ---
 
@@ -217,11 +225,11 @@ my-plugin/
 └── hooks.json
 ```
 
-<!-- The plugin manifest format is nearly identical between Copilot and Claude Code — the only difference is the directory name. Include both and your plugin works everywhere. Codex uses a different approach with .agents/skills/ and $skill-installer. -->
+<!-- Copilot and Claude use similar plugin concepts but different manifest locations and host capabilities. Include the manifests you actively support, and validate the package in each target host. -->
 
 ---
 
-## Making a Plugin Work Everywhere
+## Keep One Skill Source
 
 ```
 my-plugin/
@@ -237,17 +245,14 @@ my-plugin/
 └── hooks.json                   # Copilot + Claude
 ```
 
-**For Codex + Gemini:** Provide skills at the repo root:
-```
-.agents/skills/    # Codex CLI discovery
-.gemini/skills/    # Gemini CLI discovery
-```
+Both manifests reference the **same** skill directory.
 
-<!-- This repo demonstrates this exact pattern. We include .github/plugin.json, .claude-plugin/plugin.json, and provide .agents/skills/ and .gemini/skills/ at the repo root for Codex and Gemini users. -->
+- Keep one canonical implementation; avoid checked-in copies
+- Let installers or generated adapters handle host-specific placement
+
+<!-- This repository keeps one presentation fixture under plugins/document-tools/skills. The maintained codebytes/skills repository demonstrates a managed catalog with generated cross-agent adapters and no duplicated skill bodies. -->
 
 ---
-
-<!-- _class: lead invert -->
 
 # Plugins
 
@@ -586,9 +591,7 @@ my-plugin/
 │   └── data-analyst.agent.md
 └── skills/
     └── csv-analysis/
-        ├── SKILL.md
-        └── scripts/
-            └── analyze.py
+        └── SKILL.md
 ```
 
 <!-- Start with the directory structure. The .github/plugin.json manifest is required. Then add whatever agents, skills, hooks, or MCP configurations you need. -->
@@ -608,14 +611,14 @@ my-plugin/
   "author": { "name": "Your Team" },
   "license": "MIT",
   "keywords": ["data", "analysis", "csv"],
-  "agents": ["../agents/data-analyst.agent.md"],
-  "skills": ["../skills/csv-analysis/"]
+  "agents": ["./agents/data-analyst.agent.md"],
+  "skills": ["./skills/csv-analysis/"]
 }
 ```
 
 > **Note:** File paths are relative to the plugin root, not the `.github/` directory.
 
-<!-- The name field is critical — only use letters, numbers, and dashes. Other characters will cause silent failures. The paths point up from .github to the plugin root, then into the component directories. -->
+<!-- The name field is critical — only use letters, numbers, and dashes. Other characters will cause silent failures. Component paths are resolved from the plugin root, even though this manifest lives under .github. -->
 
 ---
 
@@ -626,10 +629,6 @@ my-plugin/
 ---
 name: data-analyst
 description: Expert data analyst for CSV, JSON, and SQL data
-tools:
-  - powershell
-  - view
-  - create
 ---
 
 You are an expert data analyst. When given data files:
@@ -641,7 +640,7 @@ You are an expert data analyst. When given data files:
 5. Produce a clean, formatted report
 ```
 
-<!-- The agent markdown file defines a persona with specific tools. When users invoke this agent, Copilot adopts this persona and follows these instructions. -->
+<!-- The agent markdown file defines a persona and workflow. When users invoke this agent, Copilot adopts the specialized role and follows these instructions. -->
 
 ---
 
@@ -651,11 +650,8 @@ You are an expert data analyst. When given data files:
 <!-- skills/csv-analysis/SKILL.md -->
 ---
 name: csv-analysis
-description: Analyze CSV files and generate statistical reports
-tools:
-  - powershell
-  - view
-  - create
+description: Analyze CSV files and generate statistical reports. Use when asked to profile or assess CSV data.
+license: MIT
 ---
 
 ## Instructions
@@ -809,7 +805,7 @@ flowchart LR
 - **[copilot-plugins](https://github.com/github/copilot-plugins)** - Official plugins
 - **[Ken Muse: Agent Plugins](https://www.kenmuse.com/blog/creating-agent-plugins-for-vs-code-and-copilot-cli/)** - Plugin walkthrough
 - **[Agent Skills Standard](https://agentskills.io)** - Open standard
-- **[Agent Skills Changelog](https://github.blog/changelog/2025-12-18-github-copilot-now-supports-agent-skills/)** - Announcement
+- **[Codebytes Skills](https://chris-ayers.com/skills/)** - Reusable catalog
 
 </div>
 <div>
