@@ -36,11 +36,13 @@ footer: '@Chris_L_Ayers - https://chris-ayers.com'
 
 # Agenda
 
-1. **Agent Skills** — Teaching Copilot specialized tasks
-2. **Plugins** — Packaging agents, skills, hooks & tools
-3. **Marketplaces** — Publishing, installing & managing plugins
-4. **Demo** — Building the `document-tools` plugin
-5. **Best Practices** — Security, versioning & team guidance
+<div class="agenda-list">
+  <div><strong>Agent Skills</strong><span>Teaching Copilot specialized tasks</span></div>
+  <div><strong>Plugins</strong><span>Packaging agents, skills, hooks & tools</span></div>
+  <div><strong>Marketplaces</strong><span>Publishing, installing & managing plugins</span></div>
+  <div><strong>Demo</strong><span>Building the <code>document-tools</code> plugin</span></div>
+  <div><strong>Best Practices</strong><span>Security, versioning & team guidance</span></div>
+</div>
 
 <!-- Walk through each concept, then do a live demo building a plugin and publishing it to a marketplace. -->
 
@@ -54,7 +56,32 @@ footer: '@Chris_L_Ayers - https://chris-ayers.com'
 
 ## The Extensibility Stack
 
-![center h:480 Skills forming the foundation for agents, plugins, and marketplaces](./img/ecosystem-layers.drawio.png)
+<div class="ecosystem-flow">
+  <div class="ecosystem-stage skills">
+    <i class="fa-solid fa-bolt"></i>
+    <strong>Skills</strong>
+    <span>On-demand capabilities</span>
+    <code>SKILL.md</code>
+  </div>
+  <div class="ecosystem-stage agents">
+    <i class="fa-solid fa-robot"></i>
+    <strong>Agents</strong>
+    <span>Specialized personas</span>
+    <code>*.agent.md</code>
+  </div>
+  <div class="ecosystem-stage plugins">
+    <i class="fa-solid fa-cube"></i>
+    <strong>Plugins</strong>
+    <span>Installable packages</span>
+    <code>plugin.json</code>
+  </div>
+  <div class="ecosystem-stage marketplaces">
+    <i class="fa-solid fa-store"></i>
+    <strong>Marketplaces</strong>
+    <span>Discovery & distribution</span>
+    <code>marketplace.json</code>
+  </div>
+</div>
 
 <!-- This stack previews the talk's progression: skills provide reusable capabilities, agents add specialization, plugins package components, and marketplaces distribute them. We will revisit the same model as an end-to-end lifecycle near the close. -->
 
@@ -219,15 +246,20 @@ The demo uses an **agent + skill**; plugins can include any combination.
 
 ## Plugin Manifest Differences
 
-| Tool | Manifest Location | Distribution |
-|------|-------------------|--------------|
-| **Copilot CLI** | `.github/plugin.json` | Copilot marketplaces |
-| **VS Code** | `.github/plugin.json` | Same package as Copilot CLI |
-| **Claude Code** | `.claude-plugin/plugin.json` | Claude marketplaces |
-| **Codex CLI** | No `plugin.json` | Skill installers and repositories |
-| **Gemini CLI** | Extension manifest | Gemini extensions |
+<div class="manifest-cards">
+  <div class="manifest-card">
+    <h3>Plugin manifests</h3>
+    <p><strong>Copilot CLI + VS Code</strong><br><code>.github/plugin.json</code></p>
+    <p><strong>Claude Code</strong><br><code>.claude-plugin/plugin.json</code></p>
+  </div>
+  <div class="manifest-card">
+    <h3>Native host models</h3>
+    <p><strong>Codex CLI</strong><br>Skill installers and repositories</p>
+    <p><strong>Gemini CLI</strong><br>Extensions and registries</p>
+  </div>
+</div>
 
-**Keep one skill implementation; add only the host adapters you support.**
+<p class="manifest-takeaway"><strong>Keep one skill implementation;</strong> add only the host adapters you support.</p>
 
 <!-- Copilot and Claude use similar plugin concepts but different manifest locations and host capabilities. Both manifests in this repository point to the same plugin-local skill. Codex and Gemini use their own installation and extension models rather than a Copilot plugin manifest. -->
 
