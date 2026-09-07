@@ -1,15 +1,25 @@
-# Document Tools Plugin
+# Document Tools Demo Plugin
 
-A GitHub Copilot plugin providing data analysis agents and skills for CSV, JSON, and tabular data.
+This compact plugin is the live example used in the "Agent Skills, Plugins &
+Marketplace" talk. It demonstrates one agent, one canonical skill, one hook,
+two host manifests, and a small input/output example.
+
+> This is a presentation fixture. Maintained reusable skills live in
+> [codebytes/skills](https://github.com/codebytes/skills).
 
 ## Structure
 
 ```
 document-tools/
+├── .claude-plugin/
+│   └── plugin.json              # Claude Code plugin manifest
 ├── .github/
-│   └── plugin.json              # Plugin manifest
+│   └── plugin.json              # GitHub Copilot plugin manifest
 ├── agents/
 │   └── data-analyst.agent.md    # Custom agent persona
+├── examples/
+│   ├── sample.csv
+│   └── sample-report.md
 ├── skills/
 │   └── csv-analysis/
 │       └── SKILL.md             # CSV analysis skill
@@ -24,7 +34,7 @@ document-tools/
 | **csv-analysis** skill | Automated CSV profiling, statistics, and quality checks |
 | **hooks** | Notification hook on subagent activation |
 
-## Installation
+## Live Demo
 
 ### From This Marketplace
 
@@ -54,4 +64,7 @@ Once installed:
 
 - The **data-analyst** agent appears in your agent selection
 - The **csv-analysis** skill auto-loads when you work with CSV files
-- Ask: "Analyze this CSV file and generate a report"
+- Ask: "Analyze `plugins/document-tools/examples/sample.csv` and generate a
+  report"
+- Compare the result with
+  `plugins/document-tools/examples/sample-report.md`

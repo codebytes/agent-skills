@@ -5,13 +5,13 @@
     "email": "noreply@chris-ayers.com"
   },
   "metadata": {
-    "description": "Agent skills, plugins, and marketplace for GitHub Copilot",
+    "description": "Presentation demo marketplace for Agent Skills and GitHub Copilot plugins",
     "version": "1.0.0"
   },
   "plugins": [
     {
       "name": "document-tools",
-      "description": "Document processing toolkit with CSV analysis, report generation, and data profiling",
+      "description": "Compact data-analysis plugin used by the Agent Skills talk",
       "version": "1.0.0",
       "source": "./plugins/document-tools"
     }
