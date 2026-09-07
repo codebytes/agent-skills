@@ -6,12 +6,6 @@ math: mathjax
 footer: '@Chris_L_Ayers - https://chris-ayers.com'
 ---
 
-<!-- Mermaid.js for diagrams -->
-<script type="module">
-  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-  mermaid.initialize({ startOnLoad: true });
-</script>
-
 <!-- _footer: 'https://github.com/codebytes/agent-skills' -->
 <!-- _paginate: skip -->
 
@@ -42,11 +36,13 @@ footer: '@Chris_L_Ayers - https://chris-ayers.com'
 
 # Agenda
 
-1. **Agent Skills** — Teaching Copilot specialized tasks
-2. **Plugins** — Packaging reusable capabilities
-3. **Marketplaces** — Discovering & sharing plugins
-4. **Demo** — Building a plugin from scratch
-5. **Best Practices** — Tips for teams
+<div class="agenda-list">
+  <div><strong>Agent Skills</strong><span>Teaching Copilot specialized tasks</span></div>
+  <div><strong>Plugins</strong><span>Packaging agents, skills, hooks & tools</span></div>
+  <div><strong>Marketplaces</strong><span>Publishing, installing & managing plugins</span></div>
+  <div><strong>Demo</strong><span>Building the <code>document-tools</code> plugin</span></div>
+  <div><strong>Best Practices</strong><span>Security, versioning & team guidance</span></div>
+</div>
 
 <!-- Walk through each concept, then do a live demo building a plugin and publishing it to a marketplace. -->
 
@@ -58,11 +54,36 @@ footer: '@Chris_L_Ayers - https://chris-ayers.com'
 
 ---
 
-## The Ecosystem at a Glance
+## The Extensibility Stack
 
-![center](./img/ecosystem-layers.drawio.png)
+<div class="ecosystem-flow">
+  <div class="ecosystem-stage skills">
+    <i class="fa-solid fa-bolt"></i>
+    <strong>Skills</strong>
+    <span>On-demand capabilities</span>
+    <code>SKILL.md</code>
+  </div>
+  <div class="ecosystem-stage agents">
+    <i class="fa-solid fa-robot"></i>
+    <strong>Agents</strong>
+    <span>Specialized personas</span>
+    <code>*.agent.md</code>
+  </div>
+  <div class="ecosystem-stage plugins">
+    <i class="fa-solid fa-cube"></i>
+    <strong>Plugins</strong>
+    <span>Installable packages</span>
+    <code>plugin.json</code>
+  </div>
+  <div class="ecosystem-stage marketplaces">
+    <i class="fa-solid fa-store"></i>
+    <strong>Marketplaces</strong>
+    <span>Discovery & distribution</span>
+    <code>marketplace.json</code>
+  </div>
+</div>
 
-<!-- This layered diagram shows how skills form the foundation, agents build on them with personas, plugins package everything together, and marketplaces make it all discoverable. Each layer adds value on top of the one below. -->
+<!-- This stack previews the talk's progression: skills provide reusable capabilities, agents add specialization, plugins package components, and marketplaces distribute them. We will revisit the same model as an end-to-end lifecycle near the close. -->
 
 ---
 
@@ -128,14 +149,7 @@ summary statistics, and any anomalies found.
 
 ## How Skills Are Discovered
 
-<div class="mermaid">
-flowchart LR
-    A[User Prompt] --> B{Copilot Evaluates<br/>Relevance}
-    B -->|Relevant| C[Load SKILL.md]
-    B -->|Not Relevant| D[Skip Skill]
-    C --> E[Use Tools<br/>& Resources]
-    E --> F[Return Results]
-</div>
+![center w:1000 Agent skill discovery flow from prompt evaluation to loading instructions and returning results](./img/skill-discovery.svg)
 
 Skills load **on demand** — only when Copilot determines they match the task.
 
@@ -161,23 +175,9 @@ Skills load **on demand** — only when Copilot determines they match the task.
 
 ---
 
-<!-- _class: lead invert -->
-
-# Cross-Tool Compatibility
-
----
-
 ## Write Once, Adapt Per Host
 
-<div class="mermaid">
-flowchart LR
-    S[Canonical Skill<br/>SKILL.md + Resources]
-    S --> A[Installer, Package,<br/>or Generated Adapter]
-    A --> C[GitHub Copilot]
-    A --> D[Claude Code]
-    A --> O[OpenAI Codex]
-    A --> G[Gemini CLI]
-</div>
+![center h:360 One canonical skill distributed through installers, packages, or adapters to multiple agent hosts](./img/skill-host-adapters.svg)
 
 **Portable format. Host-specific placement.**
 
@@ -202,67 +202,9 @@ host-specific.
 
 ---
 
-## Plugin Manifest Differences
-
-<!-- _class: small -->
-
-| Tool | Manifest Location | Marketplace |
-|------|-------------------|-------------|
-| **Copilot CLI** | `.github/plugin.json` | `.github/plugin/marketplace.json` |
-| **VS Code** | `.github/plugin.json` | Same as Copilot CLI |
-| **Claude Code** | `.claude-plugin/plugin.json` | Supported (same concept) |
-| **Codex CLI** | No plugin.json | `$skill-installer`, community repos |
-| **Gemini CLI** | Extensions system | `gemini extensions`, registries |
-
-**Solution:** Include **multiple** manifests in your plugin:
-
-```
-my-plugin/
-├── .github/plugin.json          # Copilot CLI + VS Code
-├── .claude-plugin/plugin.json   # Claude Code
-├── agents/
-├── skills/
-└── hooks.json
-```
-
-<!-- Copilot and Claude use similar plugin concepts but different manifest locations and host capabilities. Include the manifests you actively support, and validate the package in each target host. -->
-
----
-
-## Keep One Skill Source
-
-```
-my-plugin/
-├── .github/
-│   └── plugin.json              # Copilot CLI + VS Code
-├── .claude-plugin/
-│   └── plugin.json              # Claude Code
-├── agents/
-│   └── data-analyst.agent.md    # All tools
-├── skills/
-│   └── csv-analysis/
-│       └── SKILL.md             # Universal format
-└── hooks.json                   # Copilot + Claude
-```
-
-Both manifests reference the **same** skill directory.
-
-- Keep one canonical implementation; avoid checked-in copies
-- Let installers or generated adapters handle host-specific placement
-
-<!-- This repository keeps one presentation fixture under plugins/document-tools/skills. The maintained codebytes/skills repository demonstrates a managed catalog with generated cross-agent adapters and no duplicated skill bodies. -->
-
----
+<!-- _class: lead invert -->
 
 # Plugins
-
----
-
-## What's Inside a Plugin?
-
-![center](./img/plugin-anatomy.drawio.png)
-
-<!-- Plugins bundle five types of components: agents, skills, hooks, MCP servers, and LSP servers. The plugin.json manifest ties them together. Include multiple tool-specific manifests for maximum cross-tool compatibility. -->
 
 ---
 
@@ -276,40 +218,13 @@ Think of it as **package management for your Copilot configurations**.
 
 ---
 
-## What Plugins Contain
+## What's Inside a Plugin?
 
-| Component | File Pattern | Purpose |
-|-----------|-------------|---------|
-| **Custom Agents** | `agents/*.agent.md` | Specialized AI assistants |
-| **Skills** | `skills/*/SKILL.md` | Discrete callable capabilities |
-| **Hooks** | `hooks.json` | Lifecycle event handlers |
-| **MCP Servers** | `.mcp.json` | External tool integrations |
-| **LSP Servers** | `lsp.json` | Language server integrations |
+![center h:430 A plugin manifest connecting to custom agents, skills, hooks, MCP servers, and LSP servers](./img/plugin-components.svg)
 
-A plugin can include **any combination** of these.
+The demo uses an **agent + skill**; plugins can include any combination.
 
-<!-- A plugin is flexible — it can be as simple as a single agent, or as complex as a full development toolkit with multiple agents, skills, hooks, and server configurations all working together. -->
-
----
-
-## Plugin Directory Structure
-
-```
-my-plugin/
-├── .github/
-│   └── plugin.json           # Plugin manifest (required)
-├── agents/
-│   ├── api-architect.agent.md
-│   └── test-writer.agent.md
-├── skills/
-│   └── database-migrations/
-│       ├── SKILL.md
-│       └── scripts/migrate.sh
-├── hooks.json
-└── .mcp.json
-```
-
-<!-- The plugin.json manifest in .github/ is the only required file. Everything else is optional. The manifest declares what the plugin contains and points to the component locations. -->
+<!-- A plugin can be as small as one skill or as broad as a focused toolkit. The manifest ties together agents, skills, hooks, MCP servers, and LSP servers without requiring every plugin to include all five. -->
 
 ---
 
@@ -317,26 +232,36 @@ my-plugin/
 
 ```json
 {
-  "name": "my-dev-toolkit",
-  "description": "Full-stack development toolkit",
+  "name": "document-tools",
+  "description": "Data analysis demo plugin",
   "version": "1.0.0",
-  "author": {
-    "name": "Your Name",
-    "email": "you@example.com"
-  },
-  "license": "MIT",
-  "keywords": ["fullstack", "api", "testing"],
-  "agents": [
-    "./agents/api-architect.agent.md",
-    "./agents/test-writer.agent.md"
-  ],
-  "skills": [
-    "./skills/database-migrations/"
-  ]
+  "agents": "./agents/",
+  "skills": "./skills/"
 }
 ```
 
-<!-- plugin.json lives in .github/ within the plugin directory. The name should only contain letters, numbers, and dashes. File paths are relative to the plugin root, not the .github directory. -->
+<!-- plugin.json lives in .github/ within the plugin directory. The name should only contain letters, numbers, and dashes. File paths are relative to the plugin root, not the .github directory. Author, license, keywords, hooks, MCP servers, and LSP servers can be added as needed. -->
+
+---
+
+## Plugin Manifest Differences
+
+<div class="manifest-cards">
+  <div class="manifest-card">
+    <h3>Plugin manifests</h3>
+    <p><strong>Copilot CLI + VS Code</strong><br><code>.github/plugin.json</code></p>
+    <p><strong>Claude Code</strong><br><code>.claude-plugin/plugin.json</code></p>
+  </div>
+  <div class="manifest-card">
+    <h3>Native host models</h3>
+    <p><strong>Codex CLI</strong><br>Skill installers and repositories</p>
+    <p><strong>Gemini CLI</strong><br>Extensions and registries</p>
+  </div>
+</div>
+
+<p class="manifest-takeaway"><strong>Keep one skill implementation;</strong> add only the host adapters you support.</p>
+
+<!-- Copilot and Claude use similar plugin concepts but different manifest locations and host capabilities. Both manifests in this repository point to the same plugin-local skill. Codex and Gemini use their own installation and extension models rather than a Copilot plugin manifest. -->
 
 ---
 
@@ -410,46 +335,25 @@ Additional community resources:
 // .github/plugin/marketplace.json
 {
   "name": "my-team-plugins",
-  "owner": {
-    "name": "My Team",
-    "email": "team@example.com"
-  },
-  "metadata": {
-    "description": "Internal team plugin registry",
-    "version": "1.0.0"
-  },
+  "owner": { "name": "My Team" },
   "plugins": [
     {
-      "name": "dev-toolkit",
-      "description": "Full-stack development tools",
+      "name": "document-tools",
+      "description": "Data analysis demo plugin",
       "version": "1.0.0",
-      "source": "./plugins/dev-toolkit"
+      "source": "./plugins/document-tools"
     }
   ]
 }
 ```
 
-<!-- The marketplace.json file goes in .github/plugin/ at the root of a Git repository. Each plugin entry points to a directory containing the plugin manifest. Push to GitHub and you have a working marketplace. -->
+<!-- The marketplace.json file goes in .github/plugin/ at the root of a Git repository. Each plugin entry points to a directory containing the plugin manifest. Optional marketplace metadata can add a description and version. Push to GitHub and you have a working marketplace. -->
 
 ---
 
 ## Marketplace Architecture
 
-<div class="mermaid">
-flowchart TD
-    M[Marketplace Repository] --> MJ[marketplace.json]
-    MJ --> P1[Plugin: dev-toolkit]
-    MJ --> P2[Plugin: security-scanner]
-    MJ --> P3[Plugin: docs-generator]
-    P1 --> PJ1[.github/plugin.json]
-    P1 --> A1[agents/]
-    P1 --> S1[skills/]
-    P2 --> PJ2[.github/plugin.json]
-    P2 --> MCP2[.mcp.json]
-    P3 --> PJ3[.github/plugin.json]
-    P3 --> S3[skills/]
-    P3 --> H3[hooks.json]
-</div>
+![center h:480 Marketplace repository containing a manifest that points to plugins and their agents, skills, hooks, and servers](./img/marketplace-architecture.svg)
 
 <!-- A single marketplace repository can host multiple plugins, each with their own combination of components. Plugins can also reference external repositories for versioned sources. -->
 
@@ -480,13 +384,7 @@ Plugins can reference **external repositories** with specific versions:
 
 ---
 
-<!-- _class: lead invert -->
-
-# Installing & Managing Plugins
-
----
-
-## Copilot CLI Commands
+## Install and Manage from Copilot CLI
 
 ```bash
 # Browse marketplaces
@@ -494,14 +392,14 @@ copilot plugin marketplace list
 copilot plugin marketplace browse awesome-copilot
 
 # Install plugins
-copilot plugin install dev-toolkit@awesome-copilot
+copilot plugin install document-tools@agent-skills
 copilot plugin install user/repo
 copilot plugin install user/repo:plugins/subfolder
 
 # Manage plugins
 copilot plugin list
-copilot plugin update my-plugin
-copilot plugin uninstall my-plugin
+copilot plugin update document-tools
+copilot plugin uninstall document-tools
 
 # Add custom marketplace
 copilot plugin marketplace add my-org/internal-plugins
@@ -533,26 +431,11 @@ copilot plugin marketplace add my-org/internal-plugins
 
 ## How Plugins Work at Runtime
 
-<div class="mermaid">
-flowchart LR
-    I[Install Plugin] --> R[Plugin Registry]
-    R --> AG[Agents Available]
-    R --> SK[Skills Auto-load]
-    R --> HK[Hooks Execute]
-    R --> MC[MCP Servers Connect]
-    AG --> S[Copilot Session]
-    SK --> S
-    HK --> S
-    MC --> S
-</div>
+Install once; agents, skills, hooks, and tools join the **Copilot session**.
 
-After installation, plugin components **integrate automatically**:
-- Agents appear in agent selection
-- Skills load when relevant
-- Hooks fire at lifecycle events
-- MCP servers extend available tools
+![center h:400 Installed plugin components becoming available to a Copilot session](./img/plugin-runtime.svg)
 
-<!-- No additional configuration needed after install. Everything just works. This is the key UX improvement over manual configuration. -->
+<!-- After installation, agents appear in agent selection, skills load when relevant, hooks fire at lifecycle events, and MCP servers extend the available tools. The package handles integration that would otherwise require manual configuration. -->
 
 ---
 
@@ -578,35 +461,32 @@ After installation, plugin components **integrate automatically**:
 ## Step 1: Create the Plugin Structure
 
 ```bash
-mkdir -p my-plugin/.github
-mkdir -p my-plugin/agents
-mkdir -p my-plugin/skills/csv-analysis
+mkdir -p plugins/document-tools/.github
+mkdir -p plugins/document-tools/.claude-plugin
+mkdir -p plugins/document-tools/{agents,skills/csv-analysis}
 ```
 
 ```
-my-plugin/
-├── .github/
-│   └── plugin.json
-├── agents/
-│   └── data-analyst.agent.md
-└── skills/
-    └── csv-analysis/
-        └── SKILL.md
+plugins/document-tools/
+├── .github/plugin.json
+├── .claude-plugin/plugin.json
+├── agents/data-analyst.agent.md
+└── skills/csv-analysis/SKILL.md
 ```
 
-<!-- Start with the directory structure. The .github/plugin.json manifest is required. Then add whatever agents, skills, hooks, or MCP configurations you need. -->
+<!-- Build the same document-tools plugin that is checked into this repository. The Copilot and Claude manifests package one shared agent and skill implementation. Hooks and server configurations can be added later without changing the basic structure. -->
 
 ---
 
 <!-- _class: small -->
 
-## Step 2: Write the Plugin Manifest
+## Step 2: Write the Plugin Manifests
 
 ```json
-// my-plugin/.github/plugin.json
+// plugins/document-tools/.github/plugin.json
 {
-  "name": "data-analysis-toolkit",
-  "description": "Data analysis agents and skills for CSV, JSON, and SQL",
+  "name": "document-tools",
+  "description": "Data analysis demo plugin",
   "version": "1.0.0",
   "author": { "name": "Your Team" },
   "license": "MIT",
@@ -616,9 +496,9 @@ my-plugin/
 }
 ```
 
-> **Note:** File paths are relative to the plugin root, not the `.github/` directory.
+> Claude Code: add `.claude-plugin/plugin.json` for the same package.
 
-<!-- The name field is critical — only use letters, numbers, and dashes. Other characters will cause silent failures. Component paths are resolved from the plugin root, even though this manifest lives under .github. -->
+<!-- The name now stays document-tools through every remaining demo step. Component paths are resolved from the plugin root, even though the Copilot manifest lives under .github. The Claude manifest exposes the same underlying agent and skill. -->
 
 ---
 
@@ -668,7 +548,7 @@ Include: row count, column types, min/max/mean,
 null counts, and any detected anomalies.
 ```
 
-<!-- Skills are more focused than agents — they define a specific capability rather than a persona. Copilot loads skills on-demand when it detects they're relevant to the current task. -->
+<!-- This is the same csv-analysis skill introduced earlier, now packaged inside the document-tools plugin. Skills are more focused than agents: they define a capability rather than a persona and load on demand when relevant. -->
 
 ---
 
@@ -679,10 +559,7 @@ null counts, and any detected anomalies.
 {
   "name": "agent-skills",
   "owner": { "name": "Chris Ayers" },
-  "metadata": {
-    "description": "Agent skills and plugins for Copilot",
-    "version": "1.0.0"
-  },
+  "metadata": { "version": "1.0.0" },
   "plugins": [
     {
       "name": "document-tools",
@@ -724,34 +601,20 @@ Now the agent and skills are available in **every project**!
 
 <!-- _class: lead invert -->
 
-# Security & Permissions
+# Best Practices
 
 ---
 
 ## Plugin Security Model
 
-- **Folder trust** — Repo-level hooks only load after user confirms trust
-- **Tool permissions** — Standard approval prompts for plugin tools
-- **`skipPermission`** — Plugin authors can mark safe operations
-- **MCP allowlists** — Restrict servers via `MCP_ALLOWLIST` feature flag
-- **Review before install** — Always inspect unfamiliar plugins
+- **Folder trust** — Confirm a repository before hooks can load
+- **Tool permissions** — Keep approvals narrow and intentional
+- **MCP allowlists** — Restrict which servers a plugin may connect
+- **Review before install** — Use `skipPermission` only for audited safe operations
 
-<div class="mermaid">
-flowchart LR
-    T[Plugin Tool Call] --> P{Permission<br/>Required?}
-    P -->|skipPermission: true| E[Execute]
-    P -->|Standard| A[User Approval]
-    A -->|Approved| E
-    A -->|Denied| D[Blocked]
-</div>
+![center h:240 Plugin tool permission flow from request through approval or denial](./img/plugin-security.svg)
 
-<!-- Security is built into the plugin system. Users always have control over what runs. The skipPermission flag should only be used for read-only or known-safe operations. -->
-
----
-
-<!-- _class: lead invert -->
-
-# Best Practices
+<!-- Security begins before installation: inspect the source and confirm folder trust. At runtime, standard tool approvals and MCP allowlists constrain access. Pre-approval mechanisms such as skipPermission should be limited to reviewed, low-risk operations. -->
 
 ---
 
@@ -761,9 +624,8 @@ flowchart LR
 - **Keep plugins focused** — one domain per plugin
 - **Use plugins for team standards** — ensure consistency
 - **Test with Copilot CLI first** — better error messages than VS Code
-- **Version with tags** — pin external sources to `ref` values
-- **Review what you install** — plugins run code on your machine
-- **Update regularly** — `copilot plugin update` for latest fixes
+- **Pin and version sources** — use tags or immutable `ref` values
+- **Review and update deliberately** — plugins can run code on your machine
 
 <!-- The most common mistake is making plugins too broad. A "Rails development" plugin is better than an "everything" plugin. Focused plugins are easier to maintain and compose. -->
 
@@ -787,11 +649,11 @@ flowchart LR
 
 ---
 
-## The Ecosystem
+## The Full Lifecycle: Create → Consume
 
-![center](./img/create-to-consume-flow.drawio.png)
+![center h:470 Create skills and agents, package them as plugins, publish them through marketplaces, and install them for use](./img/create-to-consume-flow.drawio.png)
 
-<!-- The full lifecycle: Create skills and agents, package them as plugins, publish to marketplaces, and consumers install with one command. Security is built into every step. -->
+<!-- The opening stack showed how the concepts layer together. This closing view turns those same layers into a lifecycle: create capabilities, package them, publish them, then install and use them. Security and review apply at every step. -->
 
 ---
 
@@ -800,12 +662,12 @@ flowchart LR
 
 ## Links
 
-- **[GitHub Docs: CLI Plugins](https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-cli-plugins)** - Plugin documentation
-- **[awesome-copilot](https://github.com/github/awesome-copilot)** - Community plugins
-- **[copilot-plugins](https://github.com/github/copilot-plugins)** - Official plugins
-- **[Ken Muse: Agent Plugins](https://www.kenmuse.com/blog/creating-agent-plugins-for-vs-code-and-copilot-cli/)** - Plugin walkthrough
-- **[Agent Skills Standard](https://agentskills.io)** - Open standard
-- **[Codebytes Skills](https://chris-ayers.com/skills/)** - Reusable catalog
+- **[GitHub Docs](https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-cli-plugins)** — CLI plugins
+- **[awesome-copilot](https://github.com/github/awesome-copilot)** — Community examples
+- **[copilot-plugins](https://github.com/github/copilot-plugins)** — Official registry
+- **[Ken Muse](https://www.kenmuse.com/blog/creating-agent-plugins-for-vs-code-and-copilot-cli/)** — Plugin walkthrough
+- **[agentskills.io](https://agentskills.io)** — Open standard
+- **[Codebytes Skills](https://chris-ayers.com/skills/)** — Reusable catalog
 
 </div>
 <div>
@@ -817,7 +679,6 @@ flowchart LR
 <i class="fa fa-window-maximize"></i> Blog: [https://chris-ayers\.com/](https://chris-ayers.com/)
 <i class="fa-brands fa-github"></i> GitHub: [Codebytes](https://github.com/codebytes)
 <i class="fa-brands fa-mastodon"></i> Mastodon: [@Chrisayers@hachyderm.io](https://hachyderm.io/@Chrisayers)
-~~<i class="fa-brands fa-twitter"></i> Twitter: @Chris_L_Ayers~~
 
 </div>
 </div>
@@ -826,6 +687,8 @@ flowchart LR
 
 ---
 
-# Questions?
+<!-- _class: lead -->
 
-![bg right](./img/owl.png)
+# <!-- fit --> Questions?
+
+![bg right:55%](./img/owl.png)

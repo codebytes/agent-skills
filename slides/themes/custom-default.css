@@ -123,6 +123,122 @@ div.columns3 {
   align-items: start;
 }
 
+/* Agenda rows without ordered-list numbering */
+.agenda-list {
+  display: grid;
+  gap: 0.45rem;
+  width: 92%;
+  margin: 0.5rem auto 0;
+  text-align: left;
+}
+
+.agenda-list > div {
+  display: grid;
+  grid-template-columns: 11rem minmax(0, 1fr);
+  gap: 1rem;
+  align-items: baseline;
+  padding: 0.45rem 0.25rem;
+  border-bottom: 1px solid #d8dee4;
+}
+
+.agenda-list strong {
+  color: #244f73;
+}
+
+/* Four-stage ecosystem overview */
+.ecosystem-flow {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.ecosystem-flow::before {
+  position: absolute;
+  z-index: 0;
+  top: 2.7rem;
+  right: 10%;
+  left: 10%;
+  height: 2px;
+  background: #cbd5e1;
+  content: "";
+}
+
+.ecosystem-stage {
+  z-index: 1;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  gap: 0.6rem;
+  text-align: center;
+}
+
+.ecosystem-stage i {
+  display: grid;
+  width: 5.4rem;
+  height: 5.4rem;
+  place-items: center;
+  background: var(--color-background);
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  font-size: 2.4rem;
+}
+
+.ecosystem-stage strong {
+  font-size: 1.25em;
+}
+
+.ecosystem-stage span {
+  min-height: 2.8em;
+  color: #4f5965;
+}
+
+.ecosystem-stage.skills {
+  color: #39743c;
+}
+
+.ecosystem-stage.agents {
+  color: #315f91;
+}
+
+.ecosystem-stage.plugins {
+  color: #735080;
+}
+
+.ecosystem-stage.marketplaces {
+  color: #876313;
+}
+
+/* Host packaging comparison */
+.manifest-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.manifest-card {
+  padding: 1rem 1.25rem;
+  background: #f6f8fa;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+}
+
+.manifest-card h3 {
+  margin: 0 0 0.7rem;
+  color: #244f73;
+}
+
+.manifest-card p {
+  margin: 0.6rem 0;
+}
+
+.manifest-takeaway {
+  margin-top: 1.2rem;
+  text-align: center;
+}
+
 /* Centered images via alt text selector */
 img[alt~="center"] {
   display: block;
@@ -157,8 +273,10 @@ section.invert pre {
 
 /* Blockquote styling */
 blockquote {
-  border-left: 4px solid var(--color-highlight);
-  padding-left: 1rem;
+  padding: 0.75rem 1rem;
+  background: #f6f8fa;
+  border: 1px solid #d8dee4;
+  border-radius: 4px;
   color: var(--color-dimmed);
   font-style: italic;
 }
