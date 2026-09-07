@@ -7,6 +7,15 @@ This repository contains resources and demos for the talk "Agent Skills, Plugins
 The slides for the talk can be found at:\
 [https://chris-ayers.com/agent-skills/](https://chris-ayers.com/agent-skills/)
 
+## Reusable Skills
+
+The maintained, cross-agent skills marketplace now lives in
+[codebytes/skills](https://github.com/codebytes/skills). Browse the published
+catalog at [https://chris-ayers.com/skills/](https://chris-ayers.com/skills/).
+
+This repository remains focused on the talk, its slides, and the compact
+examples used during the presentation.
+
 ## Repository Content
 
 This repository provides a working example of the GitHub Copilot agent extensibility ecosystem — skills, plugins, and a marketplace — all in a single repo. Topics covered include:
