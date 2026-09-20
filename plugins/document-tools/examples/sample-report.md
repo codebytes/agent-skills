@@ -33,7 +33,10 @@
 | Max       | 50      | 135,000     |
 | Mean      | 35.70   | 93,111.11   |
 | Median    | 34.00   | 92,000.00   |
-| Std Dev   | 7.78    | 24,851.78   |
+| Sample Std Dev | 7.78 | 24,851.78 |
+
+Statistics exclude missing values. Sample standard deviation uses `n - 1`:
+10 observations for age and 9 for salary.
 
 ---
 
@@ -76,7 +79,7 @@ All 10 values are unique (one per row).
 
 ## Key Findings
 
-1. **Small, clean dataset** — 10 employee records with only 2 missing values across all columns (98% completeness).
+1. **Small dataset with two missing values** — 10 employee records have 48 populated cells out of 50 (96% completeness).
 
 2. **Engineering is the largest department** — 4 of 10 employees (40%), with Marketing and Sales evenly split at 3 each.
 

@@ -1,6 +1,16 @@
+---
+config:
+  themeVariables:
+    fontSize: 28px
+  flowchart:
+    nodeSpacing: 20
+    padding: 12
+---
 flowchart LR
-    A[User Prompt] --> B{Relevant?}
+    accTitle: Progressive skill discovery and invocation
+    accDescr: A host discovers skill names and descriptions. A user request or model relevance decision can trigger loading SKILL.md, followed by supporting resources and tools as needed.
+    A[Discover<br/>Metadata] --> B{Use This<br/>Skill?}
     B -->|Yes| C[Load SKILL.md]
-    B -->|No| D[Skip Skill]
-    C --> E[Use Tools and Resources]
-    E --> F[Return Results]
+    B -->|No| D[Leave Body<br/>Unloaded]
+    C --> E[Use Resources<br/>and Tools]
+    %% Source: https://agentskills.io/specification

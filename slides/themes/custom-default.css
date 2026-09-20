@@ -10,11 +10,14 @@
   --color-foreground: #333333;
   --color-highlight: #0366d6;
   --color-dimmed: #6a737d;
+  --slide-font-size: 29px;
+  --slide-small-font-size: 25px;
 }
 
 section {
   background-color: var(--color-background);
   color: var(--color-foreground);
+  font-size: var(--slide-font-size);
 }
 
 /* Link styling using theme colors */
@@ -48,7 +51,7 @@ section.invert a {
 
 /* Small text class for dense content */
 section.small {
-  font-size: 0.85em;
+  font-size: var(--slide-small-font-size);
 }
 
 section.small h2 {
