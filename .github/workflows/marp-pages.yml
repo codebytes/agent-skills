@@ -26,6 +26,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+
+      - name: Validate demo fixtures and examples
+        run: python3 -m unittest discover -s tests -v
       
       - name: Setup build directory
         run: |

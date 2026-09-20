@@ -1,13 +1,12 @@
 {
   "name": "document-tools",
   "description": "Compact data-analysis plugin used by the Agent Skills talk",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": {
     "name": "Chris Ayers",
     "email": "noreply@chris-ayers.com"
   },
   "license": "MIT",
   "keywords": ["data", "csv", "analysis", "reporting"],
-  "agents": "./agents/",
-  "skills": "./skills/"
+  "agents": ["./com.github.copilot/agents/data-analyst.agent.md"]
 }
