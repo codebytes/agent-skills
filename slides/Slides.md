@@ -18,10 +18,6 @@ footer: '@Chris_L_Ayers - https://chris-ayers.com'
 
 ---
 
-![bg fit](./img/SponsorSlide2.png)
-
----
-
 <!-- _class: bio -->
 
 ![bg left:40%](./img/portrait.png)

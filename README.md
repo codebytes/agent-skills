@@ -1,8 +1,8 @@
 # Agent Skills, Plugins & Marketplace
 
-Chris Ayers' talk on building reusable agent skills, packaging them as plugins, and
-sharing them through marketplaces. Learn to manage context and verify discovery,
-activation, and output across supported hosts.
+A talk by Chris Ayers on building reusable agent skills, managing context, and
+distributing plugins through host-specific marketplaces. Follow a one-file skill
+and a resource-backed CSV example from authoring through verification.
 
 ## Slides
 
@@ -11,12 +11,12 @@ activation, and output across supported hosts.
 ## Resources
 
 - [Slide source](slides/Slides.md)
-- [Talk guide: compatibility, rehearsal, and authoring](docs/talk-guide.md)
-- [Document-tools demo and host setup](plugins/document-tools/README.md)
+- [Talk guide: compatibility, rehearsal, authoring, and references](docs/talk-guide.md)
+- [Demo setup and host-specific rehearsal](plugins/document-tools/README.md)
+- Skill examples: [one-file release note](plugins/document-tools/skills/release-note/SKILL.md) and [resource-backed CSV analysis](plugins/document-tools/skills/csv-analysis/SKILL.md)
 - [Quality checks and tool boundaries](evals/README.md)
 - [Reusable Codebytes skills](https://chris-ayers.com/skills/) ([source](https://github.com/codebytes/skills))
 - [Agent Skills specification](https://agentskills.io/specification) and [Agent Plugins specification](https://agent-plugins.org/specification)
-- [Full reference list](docs/talk-guide.md#resources)
 
 ## Contact
 
