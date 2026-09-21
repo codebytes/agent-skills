@@ -1,0 +1,98 @@
+{
+  "title": "Verify discovery, activation, and output separately",
+  "description": "Skill metadata must be discovered before invocation. Explicit invocation or relevance-based selection loads the skill body; permissions and tools determine execution. A measured result, not installation or a hook message, is evidence that the intended workflow ran.",
+  "background": "none",
+  "padding": 20,
+  "nodes": [
+    {
+      "id": "discovery",
+      "label": "01  DISCOVER\nSkill metadata\nis visible",
+      "x": 20,
+      "y": 80,
+      "width": 235,
+      "height": 135,
+      "shape": "rounded",
+      "fill": "#eaf2ff",
+      "stroke": "#6b96cf",
+      "fontColor": "#20334b",
+      "fontSize": 28,
+      "strokeWidth": 2
+    },
+    {
+      "id": "invocation",
+      "label": "02  SELECT\nExplicit request\nor relevance",
+      "x": 295,
+      "y": 80,
+      "width": 235,
+      "height": 135,
+      "shape": "rounded",
+      "fill": "#f1ebfb",
+      "stroke": "#9b7ac3",
+      "fontColor": "#20334b",
+      "fontSize": 28,
+      "strokeWidth": 2
+    },
+    {
+      "id": "execution",
+      "label": "03  EXECUTE\nBody + needed\nresources",
+      "x": 570,
+      "y": 80,
+      "width": 235,
+      "height": 135,
+      "shape": "rounded",
+      "fill": "#fff3db",
+      "stroke": "#c59b4f",
+      "fontColor": "#20334b",
+      "fontSize": 28,
+      "strokeWidth": 2
+    },
+    {
+      "id": "verification",
+      "label": "04  VERIFY\nFacts, caveats\n+ input integrity",
+      "x": 845,
+      "y": 80,
+      "width": 235,
+      "height": 135,
+      "shape": "rounded",
+      "fill": "#e6f4ec",
+      "stroke": "#68a485",
+      "fontColor": "#20334b",
+      "fontSize": 26,
+      "strokeWidth": 2
+    },
+    {
+      "id": "caption",
+      "label": "Installed is not the same as enabled, selected, or successfully executed.",
+      "x": 20,
+      "y": 255,
+      "width": 1060,
+      "height": 55,
+      "shape": "rectangle",
+      "fill": "none",
+      "stroke": "none",
+      "fontColor": "#20334b",
+      "fontSize": 24,
+      "strokeWidth": 2
+    }
+  ],
+  "edges": [
+    {
+      "source": "discovery",
+      "target": "invocation",
+      "orthogonal": true,
+      "strokeWidth": 2
+    },
+    {
+      "source": "invocation",
+      "target": "execution",
+      "orthogonal": true,
+      "strokeWidth": 2
+    },
+    {
+      "source": "execution",
+      "target": "verification",
+      "orthogonal": true,
+      "strokeWidth": 2
+    }
+  ]
+}

@@ -8,26 +8,81 @@ Marketplace."
 The slides for the talk can be found at:\
 [https://chris-ayers.com/agent-skills/](https://chris-ayers.com/agent-skills/)
 
+The main story first defines an agent skill and when a task is worth turning into
+one. The context-window explanation comes before instruction, skill, and agent
+loading. It compares GitHub Copilot and Claude Code, including shared `AGENTS.md`
+guidance, then introduces a one-file `release-note` skill before the resource-backed
+CSV example. Waza/Vally quality checks are an optional next step, not prerequisites
+for the minimal skill. One package proceeds through verification and distribution.
+The main story closes with **Questions?**, followed by the presenter's contact
+slide before the reference appendix.
+The authoring section makes the skill naming contract visible, including the
+1–64 character limit, lowercase Unicode alphanumerics/hyphens, edge and repeated
+hyphen restrictions, and matching the parent directory.
+The reference appendix preserves host-specific paths, adapters, IDE procedures,
+version pinning, and primary sources without interrupting the main narrative.
+The plugin section explicitly shows one plugin configuring multiple MCP servers;
+an appendix example uses placeholder endpoints, not live demo services. MCP
+server processes do not automatically provide separate model context windows.
+
 ## What's Here
 
 - `slides/Slides.md` - the Marp presentation source
 - `slides/themes/custom-default.css` - the talk's custom Marp theme
-- `slides/img/` - presentation images, static SVGs, and their Mermaid sources
+- `slides/img/` - presentation images, editable `.drawio.svg` diagrams, and their JSON specifications
 - `plugins/document-tools/` - the compact, cross-host presentation fixture
+- `plugins/document-tools/skills/release-note/SKILL.md` - the entire minimal skill, with no supporting scaffold
+- `plugins/document-tools/skills/csv-analysis/` - the example with a script, reference, and template
 - `plugins/document-tools/plugin.json` - the Agent Plugins 1.0 manifest
 - `plugins/document-tools/com.github.copilot/` - Copilot-specific agent and hook
 - `.github/plugin/marketplace.json` - the minimal marketplace shown in the talk
 - `.claude-plugin/marketplace.json` - the equivalent Claude catalog
 - `.agents/plugins/marketplace.json` - Codex's native catalog for the same package
 - `tests/test_demo.py` - dependency-free fixture and documentation checks
+- `tests/test_profile_csv.py` - deterministic profiler, error-handling, and sampling checks
+- `evals/csv-analysis/` - Waza deterministic trigger coverage
+- `plugins/document-tools/skills/csv-analysis/evals/` - opt-in Vally capability cases
 
-The demo intentionally keeps one canonical `SKILL.md` inside the plugin. It is
-a presentation fixture, not the maintained distribution source for reusable
-skills.
+The demo keeps one canonical source for each of its two skills:
+
+| Example | Contents | Purpose |
+|---|---|---|
+| `release-note` | Just `SKILL.md` | Show the minimum useful skill; no scripts, tests, evals, or extra configuration |
+| `csv-analysis` | Instructions, a Python profiler, a linked methodology reference, and a report template | Show when supporting resources become useful |
+
+These are teaching fixtures, not the maintained distribution source. The optional
+quality examples apply to `csv-analysis`; they are deliberately absent from the
+minimal skill folder.
+
+## Alignment with Codebytes Skills
+
+The resource-backed CSV fixture follows the maintained [codebytes/skills](https://github.com/codebytes/skills)
+repository's explicit `USE FOR` / `DO NOT USE FOR` descriptions, workflow/safety/
+exit-criteria sections, and separate quality layers:
+
+- Waza mock/heuristic trigger suites at root `evals/<name>/`.
+- Agent-driven Vally capability specs inside the skill at `evals/<name>/`.
+- Deterministic tests for scripts, fixtures, and distribution invariants.
+
+The reference worktree was reviewed read-only at commit
+`94406df5cd7c1865cbf2b132e20afdfde052b6c2` on September 21, 2026, including its
+local quality-documentation changes. This talk is not a second managed copy of
+that collection: it has a nested plugin fixture rather than a root `skills/`
+distribution. Its explicit-encoding, immutable-input profiler is a deliberate
+teaching adaptation, not a claim about the maintained CSV skill's implementation.
+The collection's generated manifests, thumbnails, and sync lifecycle remain in
+their own repository.
+
+The minimal `release-note` example intentionally omits that production-oriented
+scaffolding: the portable format requires only its `SKILL.md`.
+
+See [quality checks and tool boundaries](evals/README.md). Passing mock routing
+checks does not prove actual model selection, and a prompt-judge score does not
+replace exact arithmetic checks or enforce a security boundary.
 
 ## Compatibility Baseline
 
-**Official guidance checked on September 20, 2026.** Configuration and
+**Official guidance checked on September 21, 2026.** Configuration and
 availability depend on the client, version, execution environment, and policy,
 not just the model provider.
 
@@ -56,8 +111,8 @@ For a new portable plugin, the demo follows the current guidance:
 
 1. Declare the exact Agent Plugins 1.0 `$schema` in a **root** `plugin.json`.
    Do not add legacy `agents`, `skills`, `hooks`, or `mcpServers` path fields.
-2. Keep skills in immediate children of `skills/`. The demo has exactly one
-   `skills/csv-analysis/SKILL.md`; its directory and frontmatter names match.
+2. Keep skills in immediate children of `skills/`. This demo has `release-note`
+   and `csv-analysis`; each directory matches its `SKILL.md` frontmatter name.
 3. Put Copilot-specific components under `com.github.copilot/`. Other clients
    do not automatically load those capabilities.
 4. Add only the native adapters the target host needs. The Claude manifest
@@ -69,10 +124,28 @@ Adding `$schema` to an old manifest without moving its components is not a
 complete migration. Existing native/legacy plugins remain supported by their
 hosts; adopting the portable format does not make every feature portable.
 
+### Shared Instructions Are Not Agent Profiles
+
+`AGENTS.md` is project guidance, not a `*.agent.md` custom-agent definition.
+[Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-custom-instructions)
+and [Copilot in VS Code](https://code.visualstudio.com/docs/agent-customization/custom-instructions)
+support it alongside their other instruction sources.
+
+[Claude Code 2.1.277+](https://code.claude.com/docs/en/memory#agents-md) supports
+native `AGENTS.md` loading in supported sessions. Its default uses `AGENTS.md`
+only when no project/ancestor `CLAUDE.md` or `CLAUDE.local.md` is present. The
+Project instructions setting can select both; an explicit `@AGENTS.md` import
+from `CLAUDE.md` is another route and remains useful where native support is
+unavailable. Do not assume identical discovery or merging across hosts.
+
+Applicable instructions become model context without a skill invocation. The
+host need not reread every file for every call; retained content and prompt
+caching are different from selection. Scope rules keep unrelated guidance out.
+
 The catalogs now use **`codebytes-agent-skills`**, because Claude reserves
 `agent-skills` as a marketplace name. The repository remains
 `codebytes/agent-skills`. See the demo's
-[catalog identity migration note](plugins/document-tools/README.md#structure)
+[catalog identity migration note](plugins/document-tools/README.md#catalogs)
 before replacing an existing installation.
 
 ### Relevant Announcements
@@ -89,19 +162,18 @@ before replacing an existing installation.
 | 2026-07-22 | [JetBrains: Rider 2026.2](https://blog.jetbrains.com/dotnet/2026/07/22/rider-2026-2-release/) | Rider exposes Skills Manager and integrated agents; skill registries and agent registries are not plugin marketplaces. |
 | 2026-08-06 | [Google: Agent Plugins](https://developers.googleblog.com/agent-plugins-package-your-skills-tools-and-more/) | Google participation is confirmed; the named shipping products are Agents CLI and Data Agent Kit, not proof of a Gemini CLI loader. |
 | 2026-08-12 | [GitHub: Agent Plugins 1.0 is GA](https://github.blog/changelog/2026-08-12-agent-plugins-1-0-in-vs-code-copilot-cli-and-the-copilot-app/) | Use the portable package format published August 6, with namespaced client extensions. |
-| 2026-08-12 | [VS Code 1.133](https://code.visualstudio.com/updates/v1_133) | Remove the blanket claim that VS Code plugin support is preview-only. |
+| 2026-08-12 | [VS Code 1.133](https://code.visualstudio.com/updates/v1_133) | Portable plugin support is available; individual capabilities have their own release status. |
 | 2026-09-03 | [Codex CLI 0.153.0](https://github.com/openai/codex/releases/tag/rust-v0.153.0) | Remote-marketplace listing, installation, and removal are part of the CLI. |
 | 2026-09-09 | [Codex CLI 0.154.0](https://github.com/openai/codex/releases/tag/rust-v0.154.0) | Live refresh improved; still rehearse updates and invocation on the actual presentation client. |
 | 2026-09-10 | [OpenAI API changelog: Agents API public beta](https://developers.openai.com/api/docs/changelog) | Managed Codex environments load plugin capabilities through API-specific configuration. |
-| 2026-09-15 | [Gemini CLI stable v0.60.0](https://geminicli.com/docs/changelogs/latest.md) | Extension environment-change consent and loader hardening reinforce the need to rehearse trust behavior. |
+| 2026-09-15 | [Gemini CLI stable v0.60.0](https://github.com/google-gemini/gemini-cli/releases/tag/v0.60.0) | Extension environment-change consent and loader hardening reinforce the need to rehearse trust behavior. |
 | 2026-09-16 | [VS Code 1.138](https://code.visualstudio.com/updates/v1_138) | New Dev Container and Codex-harness capabilities are surface-specific, not proof that all plugins work everywhere. |
 | 2026-09-17 | [Claude Code 2.1.275](https://github.com/anthropics/claude-code/releases/tag/v2.1.275) | Account skill/plugin sync and a combined marketplace-install shortcut are new; keep the established two-step demo compatible with older clients. |
 | 2026-09-18 | [Claude Code 2.1.277](https://github.com/anthropics/claude-code/releases/tag/v2.1.277) | Recent fixes affect plugin reinstallation, marketplace policy, and installed commit tracking. |
 | 2026-09-18 | [Codex CLI 0.155.1](https://github.com/openai/codex/releases/tag/rust-v0.155.1) | Released implementation baseline used to confirm portable-manifest support. |
 
-The talk's former claims that Codex only uses standalone skill installers,
-VS Code marketplaces cannot have workspace configuration, and all plugin tool
-execution goes through the same approval flow are not a valid current baseline.
+Package support, workspace configuration, and approval behavior must be checked
+for the named client rather than inferred from the model provider.
 
 ### Claude Code CLI: Native Adapter and Reserved Catalog Names
 
@@ -225,6 +297,15 @@ Check those facts and the calculation conventions against the
 [expected report](plugins/document-tools/examples/sample-report.md).
 Keep that report available as the fallback for network or live-model failures.
 The demo does not require publishing a new commit during the presentation.
+Review the source, run the local profiler, preview with
+`copilot --plugin-dir ./plugins/document-tools`, and verify the result **before**
+publishing. After installation, verify discovery, invocation, output, and input
+integrity again. Local preview and remote installation exercise different paths.
+Preflight discovery with `copilot --plugin-dir "$PWD/plugins/document-tools" skill list`.
+The flag applies to that process, not to future bare listing commands. Inside the
+preview, use `/skills` and its exact identifier: when the maintained collection
+is also installed, the demo can be listed as `document-tools:csv-analysis`, not
+bare `csv-analysis`. See the [Copilot rehearsal instructions](plugins/document-tools/README.md#copilot-cli).
 
 ### Local Checks
 
@@ -234,18 +315,69 @@ With Python 3.9 or later:
 python3 -m unittest discover -s tests -v
 ```
 
-These checks cover fixture consistency and examples, not an end-to-end model
-run. Use the host's own validator and a manual activation/output check as well.
+These checks cover fixture consistency, profiler behavior, and examples, not an
+end-to-end model run. Use the host's own validator and a manual activation/output
+check as well.
 For example, with Claude Code installed:
 
 ```bash
 claude plugin validate --strict plugins/document-tools
 ```
 
-Render the talk with Marp CLI v4 and `slides/themes`; inspect slides at their
-full presentation size, not only in a thumbnail gallery. Diagrams are static
-SVGs so PDF output does not depend on runtime Mermaid. The original detailed
-`slides/img/create-to-consume-flow.drawio.png` remains available as a reference.
+See [evals/README.md](evals/README.md) for pinned Waza setup, deterministic trigger
+checks, Vally lint, and optional authenticated capability evaluations. Do not
+run billed or agent-driven evaluations as an incidental static check.
+
+### Render and Edit the Presentation
+
+The `custom-default` theme uses the existing blue, white, and navy identity with
+a dark cover and section dividers, open comparison columns, readable dark code
+panels, consistent tables, and visible source footers. Slide-local classes
+select the cover, bio, agenda, concept, diagram, workflow, and closing layouts;
+styling does not require a new font dependency. Keep factual content and
+speaker notes separate from these presentation directives.
+
+Use Marp CLI **v4**, explicitly loading the custom theme and trusted local assets:
+
+```sh
+npx @marp-team/marp-cli@4 slides/Slides.md \
+  --theme-set slides/themes --html --allow-local-files -o /tmp/agent-skills.html
+npx @marp-team/marp-cli@4 slides/Slides.md \
+  --theme-set slides/themes --html --allow-local-files --pdf -o /tmp/agent-skills.pdf
+```
+
+Inspect every rendered slide at presentation size, including code, reference
+footers, and diagram labels. A successful render or a word-count check alone
+does not prove there is no clipping.
+
+All current diagrams are static, editable `.drawio.svg` files with an embedded
+draw.io model and a matching `*.spec.json` source. They do not require runtime
+Mermaid or a CDN to draw the image. Open the SVG in Draw.io Integration or
+diagrams.net. When editing JSON, regenerate both the rendered image and embedded
+model with the maintained
+[drawio-diagrams helper](https://github.com/codebytes/skills/tree/main/skills/drawio-diagrams).
+For example, with `DRAWIO_SKILL` pointing to that skill directory:
+
+```sh
+node "$DRAWIO_SKILL/scripts/make-drawio-svg.mjs" build \
+  slides/img/context-window-budget.spec.json \
+  -o slides/img/context-window-budget.drawio.svg
+node "$DRAWIO_SKILL/scripts/validate-drawio.mjs" \
+  slides/img/context-window-budget.drawio.svg
+```
+
+Keep JSON and SVG synchronized; do not edit only the visible SVG text.
+The older detailed `create-to-consume-flow.drawio.png` is retained as a historical
+reference, not used as a projected diagram.
+
+### Publishing
+
+Publishing requires a separately approved push/merge. The Pages workflow builds
+HTML and PDF from `main`; a local render or feature-branch edit does not update
+the public presentation. After an approved merge, check the workflow result,
+open the published deck and PDF, and confirm the context, quality-tool slides,
+and `.drawio.svg` assets match the reviewed revision. Remote plugin installs
+likewise see only the published revision and require repository access.
 
 ## Reusable Skills
 
@@ -256,6 +388,9 @@ catalog at [https://chris-ayers.com/skills/](https://chris-ayers.com/skills/).
 ## Talk Topics
 
 - Understanding **Agent Skills** and the `SKILL.md` format
+- Distinguishing always-on policy, conditional instructions, and on-demand skill resources
+- Managing context with progressive disclosure, targeted tool output, and bounded delegation
+- Separating Waza routing checks, deterministic correctness, and Vally capability evidence
 - Building **Agent Plugins 1.0** packages with host-specific extensions
 - Publishing through a host's **marketplace** or native distribution mechanism
 - Separating portable skills from discovery, tools, permissions, and adapters
@@ -263,6 +398,14 @@ catalog at [https://chris-ayers.com/skills/](https://chris-ayers.com/skills/).
 
 ## Resources
 
+- [VS Code Instruction Types](https://code.visualstudio.com/docs/agent-customization/custom-instructions)
+- [Claude Context Management](https://code.claude.com/docs/en/how-claude-code-works)
+- [Prompt Caching and Billing](https://code.claude.com/docs/en/prompt-caching)
+- [Agent Skills Execution and Progressive Disclosure](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills)
+- [Waza](https://github.com/microsoft/waza) and [evaluation specifications](https://microsoft.github.io/waza/guides/eval-yaml/)
+- [Vally CLI](https://microsoft.github.io/vally/reference/cli/eval)
+- [Anthropic Skill-Creator Evals](https://claude.com/blog/improving-skill-creator-test-measure-and-refine-agent-skills)
+- [Codebytes Quality Workflow](https://github.com/codebytes/skills#skill-quality)
 - [Agent Plugins Specification](https://agent-plugins.org/specification)
 - [GitHub Docs: About Plugins](https://docs.github.com/en/copilot/concepts/agents/about-plugins)
 - [Copilot CLI Plugin Reference](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-plugin-reference)

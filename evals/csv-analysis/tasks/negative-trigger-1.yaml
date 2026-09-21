@@ -1,0 +1,15 @@
+id: negative-trigger-001
+name: Reject spreadsheet editing
+description: "DO NOT USE FOR: editing spreadsheets, producing XLSX workbooks."
+tags: [negative-trigger]
+inputs:
+  prompt: "Edit this XLSX workbook, add formulas, and format the worksheet."
+expected:
+  should_trigger: false
+graders:
+  - type: trigger
+    name: does-not-trigger-csv-analysis
+    config:
+      skill_path: plugins/document-tools/skills/csv-analysis/SKILL.md
+      mode: negative
+      threshold: 0.9

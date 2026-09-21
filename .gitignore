@@ -351,3 +351,8 @@ MigrationBackup/
 
 # Local design-review cache
 .impeccable/hook.cache.json
+
+# Local evaluation results and agent trajectories
+.waza-cache/
+evals/.results/
+vally-results/

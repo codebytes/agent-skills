@@ -1,0 +1,118 @@
+{
+  "title": "Build, package, verify locally, distribute, and verify again",
+  "description": "Create one canonical skill, package its supported capabilities, verify locally before publication, distribute a reviewed version, then verify installed discovery, invocation, results, and unchanged input. A working local fixture is not proof that the published installation behaves identically.",
+  "background": "none",
+  "padding": 20,
+  "nodes": [
+    {
+      "id": "create",
+      "label": "BUILD\nOne skill",
+      "x": 20,
+      "y": 75,
+      "width": 180,
+      "height": 130,
+      "shape": "rounded",
+      "fill": "#eaf2ff",
+      "stroke": "#6b96cf",
+      "fontColor": "#20334b",
+      "fontSize": 26,
+      "strokeWidth": 2
+    },
+    {
+      "id": "package",
+      "label": "PACKAGE\nCapabilities",
+      "x": 240,
+      "y": 75,
+      "width": 180,
+      "height": 130,
+      "shape": "rounded",
+      "fill": "#f1ebfb",
+      "stroke": "#9b7ac3",
+      "fontColor": "#20334b",
+      "fontSize": 24,
+      "strokeWidth": 2
+    },
+    {
+      "id": "local",
+      "label": "VERIFY\nLocally",
+      "x": 460,
+      "y": 75,
+      "width": 180,
+      "height": 130,
+      "shape": "rounded",
+      "fill": "#e6f4ec",
+      "stroke": "#68a485",
+      "fontColor": "#20334b",
+      "fontSize": 26,
+      "strokeWidth": 2
+    },
+    {
+      "id": "distribute",
+      "label": "DISTRIBUTE\nReviewed\nversion",
+      "x": 680,
+      "y": 75,
+      "width": 180,
+      "height": 130,
+      "shape": "rounded",
+      "fill": "#fff3db",
+      "stroke": "#c59b4f",
+      "fontColor": "#20334b",
+      "fontSize": 24,
+      "strokeWidth": 2
+    },
+    {
+      "id": "installed",
+      "label": "VERIFY\nInstalled\nresult",
+      "x": 900,
+      "y": 75,
+      "width": 180,
+      "height": 130,
+      "shape": "rounded",
+      "fill": "#e6f4ec",
+      "stroke": "#68a485",
+      "fontColor": "#20334b",
+      "fontSize": 26,
+      "strokeWidth": 2
+    },
+    {
+      "id": "caption",
+      "label": "Trust checks apply before every new executable version.",
+      "x": 20,
+      "y": 245,
+      "width": 1060,
+      "height": 60,
+      "shape": "rectangle",
+      "fill": "none",
+      "stroke": "none",
+      "fontColor": "#20334b",
+      "fontSize": 26,
+      "strokeWidth": 2
+    }
+  ],
+  "edges": [
+    {
+      "source": "create",
+      "target": "package",
+      "orthogonal": true,
+      "strokeWidth": 2
+    },
+    {
+      "source": "package",
+      "target": "local",
+      "orthogonal": true,
+      "strokeWidth": 2
+    },
+    {
+      "source": "local",
+      "target": "distribute",
+      "orthogonal": true,
+      "strokeWidth": 2
+    },
+    {
+      "source": "distribute",
+      "target": "installed",
+      "orthogonal": true,
+      "strokeWidth": 2
+    }
+  ]
+}

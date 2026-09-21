@@ -1,0 +1,86 @@
+{
+  "title": "Portable plugin components and host-specific additions",
+  "description": "An Agent Plugins 1.0 root manifest packages skills and optionally MCP configuration. This fixture includes the one-file release-note skill and resource-backed csv-analysis skill plus a Copilot-namespaced agent and hook. It does not configure an MCP server. Host-specific components are not universally portable.",
+  "background": "none",
+  "padding": 20,
+  "nodes": [
+    {
+      "id": "plugin",
+      "label": "document-tools\nplugin.json",
+      "x": 20,
+      "y": 120,
+      "width": 330,
+      "height": 110,
+      "shape": "rounded",
+      "fill": "#f1ebfb",
+      "stroke": "#9b7ac3",
+      "fontColor": "#20334b",
+      "fontSize": 30,
+      "strokeWidth": 2
+    },
+    {
+      "id": "skill",
+      "label": "skills/\nrelease-note + csv-analysis",
+      "x": 610,
+      "y": 20,
+      "width": 470,
+      "height": 85,
+      "shape": "rounded",
+      "fill": "#eaf2ff",
+      "stroke": "#6b96cf",
+      "fontColor": "#20334b",
+      "fontSize": 28,
+      "strokeWidth": 2
+    },
+    {
+      "id": "mcp",
+      "label": "mcp.json  /  Optional\nMCP server config (not in demo)",
+      "x": 610,
+      "y": 135,
+      "width": 470,
+      "height": 85,
+      "shape": "rounded",
+      "fill": "#f3f6fa",
+      "stroke": "#b5c1cf",
+      "fontColor": "#20334b",
+      "fontSize": 26,
+      "strokeWidth": 2
+    },
+    {
+      "id": "host",
+      "label": "com.github.copilot/\nOptional agent + hook",
+      "x": 610,
+      "y": 250,
+      "width": 470,
+      "height": 85,
+      "shape": "rounded",
+      "fill": "#fff3db",
+      "stroke": "#c59b4f",
+      "fontColor": "#20334b",
+      "fontSize": 28,
+      "strokeWidth": 2
+    }
+  ],
+  "edges": [
+    {
+      "source": "plugin",
+      "target": "skill",
+      "orthogonal": true,
+      "strokeWidth": 2
+    },
+    {
+      "source": "plugin",
+      "target": "mcp",
+      "orthogonal": true,
+      "strokeWidth": 2,
+      "dashed": true
+    },
+    {
+      "source": "plugin",
+      "target": "host",
+      "orthogonal": true,
+      "strokeWidth": 2,
+      "dashed": true
+    }
+  ]
+}

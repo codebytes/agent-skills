@@ -1,5 +1,10 @@
 # CSV Analysis Report: `sample.csv`
 
+This is the checked reference report for the complete synthetic fixture, not a
+claim that a live model run succeeded. Empty cells are missing; the header is
+excluded from completeness. Category and date summaries below are additional
+full-file measurements, beyond the profiler's compact JSON output.
+
 ## Overview
 
 | Property    | Value        |
@@ -83,8 +88,8 @@ All 10 values are unique (one per row).
 
 2. **Engineering is the largest department** — 4 of 10 employees (40%), with Marketing and Sales evenly split at 3 each.
 
-3. **Wide salary range** — Salaries span from $61,000 to $135,000 (a 2.2× difference), with a standard deviation of ~$24,852, indicating moderate dispersion.
+3. **Salary values span 61,000–135,000** — Across 9 observations, the mean is 93,111.11 and sample standard deviation is 24,851.78. The fixture does not specify a currency.
 
-4. **Age distribution skews younger** — The median age is 34 with a range of 26–50. Most employees are in their late 20s to mid-30s.
+4. **Median age is 34** — The 10 ages range from 26 to 50, with a mean of 35.70. No comparison population is supplied, so this does not establish a younger or older workforce.
 
-5. **Tenure varies significantly** — Start dates range from Aug 2017 to Feb 2023 (~5.5 years), suggesting a mix of long-tenured and recently hired staff.
+5. **Start dates span about 5.5 years** — The 9 recorded dates range from 2017-08-30 to 2023-02-28. This is the span between start dates, not employee tenure; no as-of date is supplied.

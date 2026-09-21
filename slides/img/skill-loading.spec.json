@@ -1,0 +1,98 @@
+{
+  "title": "How a host discovers and invokes skills",
+  "description": "The host discovers supported project, personal, and enabled-package skill locations. It exposes available names and descriptions, loads a selected SKILL.md body on invocation, then reads or executes needed resources. Discovery does not mean every body is in the model context; host policies and precedence differ.",
+  "background": "none",
+  "padding": 20,
+  "nodes": [
+    {
+      "id": "discover",
+      "label": "DISCOVER\nProject / user\n+ packages",
+      "x": 20,
+      "y": 75,
+      "width": 235,
+      "height": 145,
+      "shape": "rounded",
+      "fill": "#eaf2ff",
+      "stroke": "#6b96cf",
+      "fontColor": "#20334b",
+      "fontSize": 26,
+      "strokeWidth": 2
+    },
+    {
+      "id": "describe",
+      "label": "DESCRIBE\nName + purpose",
+      "x": 295,
+      "y": 75,
+      "width": 235,
+      "height": 145,
+      "shape": "rounded",
+      "fill": "#f1ebfb",
+      "stroke": "#9b7ac3",
+      "fontColor": "#20334b",
+      "fontSize": 26,
+      "strokeWidth": 2
+    },
+    {
+      "id": "invoke",
+      "label": "INVOKE\nLoad SKILL.md",
+      "x": 570,
+      "y": 75,
+      "width": 235,
+      "height": 145,
+      "shape": "rounded",
+      "fill": "#fff3db",
+      "stroke": "#c59b4f",
+      "fontColor": "#20334b",
+      "fontSize": 26,
+      "strokeWidth": 2
+    },
+    {
+      "id": "resources",
+      "label": "USE\nRead / execute\nneeded resources",
+      "x": 845,
+      "y": 75,
+      "width": 235,
+      "height": 145,
+      "shape": "rounded",
+      "fill": "#e6f4ec",
+      "stroke": "#68a485",
+      "fontColor": "#20334b",
+      "fontSize": 25,
+      "strokeWidth": 2
+    },
+    {
+      "id": "caption",
+      "label": "Explicit invocation or relevance-based selection, as supported by the host.",
+      "x": 20,
+      "y": 260,
+      "width": 1060,
+      "height": 55,
+      "shape": "rectangle",
+      "fill": "none",
+      "stroke": "none",
+      "fontColor": "#20334b",
+      "fontSize": 24,
+      "strokeWidth": 2
+    }
+  ],
+  "edges": [
+    {
+      "source": "discover",
+      "target": "describe",
+      "orthogonal": true,
+      "strokeWidth": 2
+    },
+    {
+      "source": "describe",
+      "target": "invoke",
+      "orthogonal": true,
+      "strokeWidth": 2
+    },
+    {
+      "source": "invoke",
+      "target": "resources",
+      "orthogonal": true,
+      "strokeWidth": 2
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "title": "Review source and controls before loading executable components",
+  "description": "Review source and publisher, select a reviewed revision, and check host trust, permissions, and sandbox controls before installing or loading the approved package. Package-path containment is not a subprocess sandbox; installation itself may enable executable components.",
+  "background": "none",
+  "padding": 20,
+  "nodes": [
+    {
+      "id": "review",
+      "label": "REVIEW\nSource + publisher",
+      "x": 20,
+      "y": 70,
+      "width": 235,
+      "height": 120,
+      "shape": "rounded",
+      "fill": "#eaf2ff",
+      "stroke": "#6b96cf",
+      "fontColor": "#20334b",
+      "fontSize": 26,
+      "strokeWidth": 2
+    },
+    {
+      "id": "revision",
+      "label": "PIN\nReviewed revision",
+      "x": 295,
+      "y": 70,
+      "width": 235,
+      "height": 120,
+      "shape": "rounded",
+      "fill": "#f1ebfb",
+      "stroke": "#9b7ac3",
+      "fontColor": "#20334b",
+      "fontSize": 26,
+      "strokeWidth": 2
+    },
+    {
+      "id": "controls",
+      "label": "CHECK\nTrust + permissions",
+      "x": 570,
+      "y": 70,
+      "width": 235,
+      "height": 120,
+      "shape": "rounded",
+      "fill": "#fff3db",
+      "stroke": "#c59b4f",
+      "fontColor": "#20334b",
+      "fontSize": 25,
+      "strokeWidth": 2
+    },
+    {
+      "id": "load",
+      "label": "LOAD\nApproved package",
+      "x": 845,
+      "y": 70,
+      "width": 235,
+      "height": 120,
+      "shape": "rounded",
+      "fill": "#e6f4ec",
+      "stroke": "#68a485",
+      "fontColor": "#20334b",
+      "fontSize": 26,
+      "strokeWidth": 2
+    },
+    {
+      "id": "caption",
+      "label": "Installation may enable executable components.\nReview host controls before that boundary, not afterward.",
+      "x": 20,
+      "y": 230,
+      "width": 1060,
+      "height": 75,
+      "shape": "rectangle",
+      "fill": "none",
+      "stroke": "none",
+      "fontColor": "#20334b",
+      "fontSize": 24,
+      "strokeWidth": 2
+    }
+  ],
+  "edges": [
+    {
+      "source": "review",
+      "target": "revision",
+      "orthogonal": true,
+      "strokeWidth": 2
+    },
+    {
+      "source": "revision",
+      "target": "controls",
+      "orthogonal": true,
+      "strokeWidth": 2
+    },
+    {
+      "source": "controls",
+      "target": "load",
+      "orthogonal": true,
+      "strokeWidth": 2
+    }
+  ]
+}

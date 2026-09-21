@@ -1,0 +1,90 @@
+{
+  "title": "One plugin can configure multiple MCP servers",
+  "description": "An illustrative plugin-root mcp.json names a documentation server and an issue-tracking server. The host starts or connects to supported servers and exposes their tools to the active agent. Local or remote server execution is not a separate model context window. The actual CSV teaching fixture has no MCP servers.",
+  "background": "none",
+  "padding": 20,
+  "nodes": [
+    {
+      "id": "plugin",
+      "label": "ONE PLUGIN\nmcp.json\nmcpServers map",
+      "x": 20,
+      "y": 115,
+      "width": 290,
+      "height": 130,
+      "shape": "rounded",
+      "fill": "#f1ebfb",
+      "stroke": "#9b7ac3",
+      "fontColor": "#20334b",
+      "fontSize": 27,
+      "strokeWidth": 2
+    },
+    {
+      "id": "docs",
+      "label": "docs server\nDocumentation tools",
+      "x": 425,
+      "y": 30,
+      "width": 310,
+      "height": 105,
+      "shape": "rounded",
+      "fill": "#eaf2ff",
+      "stroke": "#6b96cf",
+      "fontColor": "#20334b",
+      "fontSize": 26,
+      "strokeWidth": 2
+    },
+    {
+      "id": "issues",
+      "label": "issues server\nIssue-tracking tools",
+      "x": 425,
+      "y": 235,
+      "width": 310,
+      "height": 105,
+      "shape": "rounded",
+      "fill": "#fff3db",
+      "stroke": "#c59b4f",
+      "fontColor": "#20334b",
+      "fontSize": 26,
+      "strokeWidth": 2
+    },
+    {
+      "id": "agent",
+      "label": "HOST EXPOSURE\nTools for the\nactive agent",
+      "x": 845,
+      "y": 115,
+      "width": 270,
+      "height": 130,
+      "shape": "rounded",
+      "fill": "#e6f4ec",
+      "stroke": "#68a485",
+      "fontColor": "#20334b",
+      "fontSize": 26,
+      "strokeWidth": 2
+    }
+  ],
+  "edges": [
+    {
+      "source": "plugin",
+      "target": "docs",
+      "orthogonal": true,
+      "strokeWidth": 2
+    },
+    {
+      "source": "plugin",
+      "target": "issues",
+      "orthogonal": true,
+      "strokeWidth": 2
+    },
+    {
+      "source": "docs",
+      "target": "agent",
+      "orthogonal": true,
+      "strokeWidth": 2
+    },
+    {
+      "source": "issues",
+      "target": "agent",
+      "orthogonal": true,
+      "strokeWidth": 2
+    }
+  ]
+}

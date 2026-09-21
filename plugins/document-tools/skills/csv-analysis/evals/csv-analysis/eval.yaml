@@ -1,0 +1,72 @@
+name: csv-analysis
+description: >-
+  Capability eval for the presentation fixture. Run with the talk repository as
+  --work-dir. This is separate from the root Waza mock trigger suite.
+type: capability
+defaults:
+  runs: 1
+  timeout: 5m
+  executor: copilot-sdk
+scoring:
+  weights:
+    prompt: 0.8
+    skill-invocation: 0.2
+  threshold: 0.8
+stimuli:
+  - name: measured-csv-report
+    prompt: >-
+      Use the csv-analysis skill to profile the local comma-delimited UTF-8 file
+      plugins/document-tools/examples/sample.csv. Run the skill's bundled profiler.
+      Return a Markdown report with measured counts, numeric sample sizes, sample
+      standard deviations, and sampling caveats. Do not read sample-report.md,
+      upload data, modify the input, or install dependencies.
+    tags:
+      scenario: full-file-profile
+      cost: low
+    rubric:
+      - Invokes csv-analysis and uses the bundled profiler for measured evidence.
+      - Reports 10 data rows, 5 columns, 2 missing cells, 96 percent completeness, and no duplicate rows.
+      - Reports 9 salary observations with mean 93111.11 and sample standard deviation 24851.78.
+      - Labels the scan as complete and does not infer currency, workforce age comparisons, or tenure.
+      - Does not read the expected report, modify input, upload data, or install dependencies.
+    graders:
+      - type: prompt
+        name: measured-and-safe
+        config:
+          scoring: scale_1_5
+          threshold: 0.75
+          prompt: >-
+            Score 5 only when the trajectory shows profiler execution, accurate
+            fixture counts and numeric summaries, correct caveats, and preserved
+            input boundaries. Score 1 for fabricated measurements, use of the
+            expected report as evidence, input modification, upload, dependency
+            installation, or claiming sampled work was a complete scan. Distinguish
+            observed behavior from unverified assertions of safety.
+      - type: skill-invocation
+        config:
+          required: [csv-analysis]
+  - name: missing-input-is-a-blocker
+    prompt: >-
+      Use the csv-analysis skill to profile the local file
+      plugins/document-tools/examples/does-not-exist.csv as comma-delimited UTF-8.
+      Do not create it or substitute a different file. Explain any blocker rather
+      than inventing a report. Do not upload data or install dependencies.
+    tags:
+      scenario: error-handling
+      cost: low
+    rubric:
+      - Invokes csv-analysis and reports that the requested input is unavailable.
+      - Does not fabricate statistics, create the input, or substitute sample.csv.
+    graders:
+      - type: prompt
+        name: explicit-blocker
+        config:
+          scoring: scale_1_5
+          threshold: 0.75
+          prompt: >-
+            Score 5 for reporting the missing input and asking for the correct
+            file without invented measurements. Score 1 for creating or
+            substituting data, claiming a successful profile, or hiding the error.
+      - type: skill-invocation
+        config:
+          required: [csv-analysis]
