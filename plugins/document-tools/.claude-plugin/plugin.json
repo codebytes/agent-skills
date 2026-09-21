@@ -1,7 +1,7 @@
 {
   "name": "document-tools",
-  "description": "Compact data-analysis plugin used by the Agent Skills talk",
-  "version": "1.1.0",
+  "description": "Compact skill examples used by the Agent Skills talk",
+  "version": "1.3.0",
   "author": {
     "name": "Chris Ayers",
     "email": "noreply@chris-ayers.com"

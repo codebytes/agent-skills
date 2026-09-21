@@ -1,0 +1,116 @@
+{
+  "title": "The host exposes the supported components of an enabled plugin",
+  "description": "After review, a host processes enabled plugin components according to its own support and policy. It can expose skill metadata, register optional host extensions, and configure MCP servers when present. An enabled package is not proof of skill invocation or successful execution.",
+  "background": "none",
+  "padding": 20,
+  "nodes": [
+    {
+      "id": "package",
+      "label": "Enabled package\nReviewed source",
+      "x": 20,
+      "y": 125,
+      "width": 280,
+      "height": 95,
+      "shape": "rounded",
+      "fill": "#f1ebfb",
+      "stroke": "#9b7ac3",
+      "fontColor": "#20334b",
+      "fontSize": 28,
+      "strokeWidth": 2
+    },
+    {
+      "id": "skills",
+      "label": "Expose skill metadata",
+      "x": 420,
+      "y": 20,
+      "width": 310,
+      "height": 85,
+      "shape": "rounded",
+      "fill": "#eaf2ff",
+      "stroke": "#6b96cf",
+      "fontColor": "#20334b",
+      "fontSize": 26,
+      "strokeWidth": 2
+    },
+    {
+      "id": "extensions",
+      "label": "Register agent / hook",
+      "x": 420,
+      "y": 130,
+      "width": 310,
+      "height": 85,
+      "shape": "rounded",
+      "fill": "#fff3db",
+      "stroke": "#c59b4f",
+      "fontColor": "#20334b",
+      "fontSize": 26,
+      "strokeWidth": 2
+    },
+    {
+      "id": "mcp",
+      "label": "MCP when present",
+      "x": 420,
+      "y": 240,
+      "width": 310,
+      "height": 85,
+      "shape": "rounded",
+      "fill": "#f3f6fa",
+      "stroke": "#b5c1cf",
+      "fontColor": "#20334b",
+      "fontSize": 26,
+      "strokeWidth": 2
+    },
+    {
+      "id": "session",
+      "label": "Host session\nSupported capabilities",
+      "x": 820,
+      "y": 125,
+      "width": 280,
+      "height": 95,
+      "shape": "rounded",
+      "fill": "#e6f4ec",
+      "stroke": "#68a485",
+      "fontColor": "#20334b",
+      "fontSize": 24,
+      "strokeWidth": 2
+    }
+  ],
+  "edges": [
+    {
+      "source": "package",
+      "target": "skills",
+      "orthogonal": true,
+      "strokeWidth": 2
+    },
+    {
+      "source": "package",
+      "target": "extensions",
+      "orthogonal": true,
+      "strokeWidth": 2
+    },
+    {
+      "source": "package",
+      "target": "mcp",
+      "orthogonal": true,
+      "strokeWidth": 2
+    },
+    {
+      "source": "skills",
+      "target": "session",
+      "orthogonal": true,
+      "strokeWidth": 2
+    },
+    {
+      "source": "extensions",
+      "target": "session",
+      "orthogonal": true,
+      "strokeWidth": 2
+    },
+    {
+      "source": "mcp",
+      "target": "session",
+      "orthogonal": true,
+      "strokeWidth": 2
+    }
+  ]
+}

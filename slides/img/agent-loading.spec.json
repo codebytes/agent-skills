@@ -1,0 +1,98 @@
+{
+  "title": "How host-specific agent profiles become active",
+  "description": "The host registers supported agent definition files and makes their metadata available for selection or routing. Activation applies the selected profile prompt and configured tools. Depending on the host and invocation, that configuration applies to the main thread or a delegated worker; discovery alone does not run an agent.",
+  "background": "none",
+  "padding": 20,
+  "nodes": [
+    {
+      "id": "discover",
+      "label": "REGISTER\n.agent.md files",
+      "x": 20,
+      "y": 75,
+      "width": 235,
+      "height": 145,
+      "shape": "rounded",
+      "fill": "#eaf2ff",
+      "stroke": "#6b96cf",
+      "fontColor": "#20334b",
+      "fontSize": 26,
+      "strokeWidth": 2
+    },
+    {
+      "id": "describe",
+      "label": "LIST / ROUTE\nName + purpose",
+      "x": 295,
+      "y": 75,
+      "width": 235,
+      "height": 145,
+      "shape": "rounded",
+      "fill": "#f1ebfb",
+      "stroke": "#9b7ac3",
+      "fontColor": "#20334b",
+      "fontSize": 26,
+      "strokeWidth": 2
+    },
+    {
+      "id": "activate",
+      "label": "ACTIVATE\nPrompt + tools",
+      "x": 570,
+      "y": 75,
+      "width": 235,
+      "height": 145,
+      "shape": "rounded",
+      "fill": "#fff3db",
+      "stroke": "#c59b4f",
+      "fontColor": "#20334b",
+      "fontSize": 26,
+      "strokeWidth": 2
+    },
+    {
+      "id": "run",
+      "label": "RUN\nMain or worker\nHost-controlled",
+      "x": 845,
+      "y": 75,
+      "width": 235,
+      "height": 145,
+      "shape": "rounded",
+      "fill": "#e6f4ec",
+      "stroke": "#68a485",
+      "fontColor": "#20334b",
+      "fontSize": 25,
+      "strokeWidth": 2
+    },
+    {
+      "id": "caption",
+      "label": "Supported locations, precedence, invocation, and model settings are host-specific.",
+      "x": 20,
+      "y": 260,
+      "width": 1060,
+      "height": 55,
+      "shape": "rectangle",
+      "fill": "none",
+      "stroke": "none",
+      "fontColor": "#20334b",
+      "fontSize": 24,
+      "strokeWidth": 2
+    }
+  ],
+  "edges": [
+    {
+      "source": "discover",
+      "target": "describe",
+      "orthogonal": true,
+      "strokeWidth": 2
+    },
+    {
+      "source": "describe",
+      "target": "activate",
+      "orthogonal": true,
+      "strokeWidth": 2
+    },
+    {
+      "source": "activate",
+      "target": "run",
+      "orthogonal": true,
+      "strokeWidth": 2
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "title": "One finite context window, assembled for a model call",
+  "description": "Instructions, exposed tools and skill metadata, and retained messages and reads share a finite context budget with response headroom. These conceptual categories are not measured token proportions. The host selects and compacts content; caching and billing are separate.",
+  "background": "none",
+  "padding": 20,
+  "nodes": [
+    {
+      "id": "heading",
+      "label": "ONE MODEL CALL  /  FINITE CONTEXT",
+      "x": 20,
+      "y": 10,
+      "width": 1060,
+      "height": 50,
+      "shape": "rectangle",
+      "fill": "none",
+      "stroke": "none",
+      "fontColor": "#20334b",
+      "fontSize": 30,
+      "strokeWidth": 2
+    },
+    {
+      "id": "instructions",
+      "label": "Instructions\nSystem + rules\nFor this request",
+      "x": 20,
+      "y": 95,
+      "width": 250,
+      "height": 135,
+      "shape": "rounded",
+      "fill": "#eaf2ff",
+      "stroke": "#6b96cf",
+      "fontColor": "#20334b",
+      "fontSize": 28,
+      "strokeWidth": 2
+    },
+    {
+      "id": "catalog",
+      "label": "Available tools\n+ skill metadata\nHost-selected",
+      "x": 290,
+      "y": 95,
+      "width": 250,
+      "height": 135,
+      "shape": "rounded",
+      "fill": "#f1ebfb",
+      "stroke": "#9b7ac3",
+      "fontColor": "#20334b",
+      "fontSize": 28,
+      "strokeWidth": 2
+    },
+    {
+      "id": "working",
+      "label": "Working context\nMessages + reads\nRetained by host",
+      "x": 560,
+      "y": 95,
+      "width": 250,
+      "height": 135,
+      "shape": "rounded",
+      "fill": "#fff3db",
+      "stroke": "#c59b4f",
+      "fontColor": "#20334b",
+      "fontSize": 28,
+      "strokeWidth": 2
+    },
+    {
+      "id": "headroom",
+      "label": "Headroom\nFurther work\n+ response",
+      "x": 830,
+      "y": 95,
+      "width": 250,
+      "height": 135,
+      "shape": "rounded",
+      "fill": "#e6f4ec",
+      "stroke": "#68a485",
+      "fontColor": "#20334b",
+      "fontSize": 28,
+      "strokeWidth": 2
+    },
+    {
+      "id": "caption",
+      "label": "Conceptual categories, not measured proportions.\nHistory can be compacted; cached input still occupies context.",
+      "x": 20,
+      "y": 260,
+      "width": 1060,
+      "height": 70,
+      "shape": "rectangle",
+      "fill": "none",
+      "stroke": "none",
+      "fontColor": "#20334b",
+      "fontSize": 24,
+      "strokeWidth": 2
+    }
+  ],
+  "edges": []
+}

@@ -1,0 +1,15 @@
+id: positive-trigger-002
+name: Profile tabular data
+description: Inspect missing values, duplicates, and numeric statistics.
+tags: [positive-trigger]
+inputs:
+  prompt: "Profile this tabular CSV data for missing values, duplicates, statistics, and outliers."
+expected:
+  should_trigger: true
+graders:
+  - type: trigger
+    name: triggers-csv-analysis
+    config:
+      skill_path: plugins/document-tools/skills/csv-analysis/SKILL.md
+      mode: positive
+      threshold: 0.6

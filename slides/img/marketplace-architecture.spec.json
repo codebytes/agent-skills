@@ -1,0 +1,113 @@
+{
+  "title": "The actual one-plugin presentation catalog",
+  "description": "The codebytes-agent-skills catalog references ./plugins/document-tools relative to the repository root. That package contains release-note and csv-analysis plus optional Copilot-specific components. This diagram depicts the checked-in fixture, not imaginary additional plugins.",
+  "background": "none",
+  "padding": 20,
+  "nodes": [
+    {
+      "id": "catalog",
+      "label": "CATALOG\ncodebytes-agent-skills",
+      "x": 20,
+      "y": 100,
+      "width": 325,
+      "height": 115,
+      "shape": "rounded",
+      "fill": "#f1ebfb",
+      "stroke": "#9b7ac3",
+      "fontColor": "#20334b",
+      "fontSize": 26,
+      "strokeWidth": 2
+    },
+    {
+      "id": "package",
+      "label": "PACKAGE\ndocument-tools\nversion 1.3.0",
+      "x": 445,
+      "y": 100,
+      "width": 275,
+      "height": 115,
+      "shape": "rounded",
+      "fill": "#eaf2ff",
+      "stroke": "#6b96cf",
+      "fontColor": "#20334b",
+      "fontSize": 26,
+      "strokeWidth": 2
+    },
+    {
+      "id": "skill",
+      "label": "SKILLS\nrelease-note\ncsv-analysis",
+      "x": 830,
+      "y": 35,
+      "width": 280,
+      "height": 95,
+      "shape": "rounded",
+      "fill": "#e6f4ec",
+      "stroke": "#68a485",
+      "fontColor": "#20334b",
+      "fontSize": 24,
+      "strokeWidth": 2
+    },
+    {
+      "id": "host",
+      "label": "Optional extras\nCopilot agent + hook",
+      "x": 830,
+      "y": 245,
+      "width": 280,
+      "height": 95,
+      "shape": "rounded",
+      "fill": "#fff3db",
+      "stroke": "#c59b4f",
+      "fontColor": "#20334b",
+      "fontSize": 25,
+      "strokeWidth": 2
+    },
+    {
+      "id": "catalog-path",
+      "label": ".github/plugin/\nmarketplace.json",
+      "x": 20,
+      "y": 255,
+      "width": 325,
+      "height": 75,
+      "shape": "rectangle",
+      "fill": "none",
+      "stroke": "none",
+      "fontColor": "#20334b",
+      "fontSize": 24,
+      "strokeWidth": 2
+    },
+    {
+      "id": "source-path",
+      "label": "./plugins/document-tools\nFrom repository root",
+      "x": 400,
+      "y": 255,
+      "width": 365,
+      "height": 75,
+      "shape": "rectangle",
+      "fill": "none",
+      "stroke": "none",
+      "fontColor": "#20334b",
+      "fontSize": 23,
+      "strokeWidth": 2
+    }
+  ],
+  "edges": [
+    {
+      "source": "catalog",
+      "target": "package",
+      "orthogonal": true,
+      "strokeWidth": 2
+    },
+    {
+      "source": "package",
+      "target": "skill",
+      "orthogonal": true,
+      "strokeWidth": 2
+    },
+    {
+      "source": "package",
+      "target": "host",
+      "orthogonal": true,
+      "strokeWidth": 2,
+      "dashed": true
+    }
+  ]
+}

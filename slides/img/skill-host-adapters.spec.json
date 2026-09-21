@@ -1,0 +1,124 @@
+{
+  "title": "One skill implementation with supported host adapters",
+  "description": "One canonical skill and its local resources can be distributed through a compatible package or native adapter to Copilot, Claude Code, Codex, and Gemini CLI. Shared format does not imply identical discovery, permissions, or runtime behavior.",
+  "background": "none",
+  "padding": 20,
+  "nodes": [
+    {
+      "id": "skill",
+      "label": "One canonical skill\nSKILL.md + resources",
+      "x": 20,
+      "y": 135,
+      "width": 310,
+      "height": 110,
+      "shape": "rounded",
+      "fill": "#eaf2ff",
+      "stroke": "#6b96cf",
+      "fontColor": "#20334b",
+      "fontSize": 26,
+      "strokeWidth": 2
+    },
+    {
+      "id": "adapter",
+      "label": "Supported package\nor native adapter",
+      "x": 415,
+      "y": 135,
+      "width": 290,
+      "height": 110,
+      "shape": "rounded",
+      "fill": "#f1ebfb",
+      "stroke": "#9b7ac3",
+      "fontColor": "#20334b",
+      "fontSize": 26,
+      "strokeWidth": 2
+    },
+    {
+      "id": "copilot",
+      "label": "GitHub Copilot",
+      "x": 820,
+      "y": 20,
+      "width": 260,
+      "height": 70,
+      "shape": "rounded",
+      "fill": "#e6f4ec",
+      "stroke": "#68a485",
+      "fontColor": "#20334b",
+      "fontSize": 26,
+      "strokeWidth": 2
+    },
+    {
+      "id": "claude",
+      "label": "Claude Code",
+      "x": 820,
+      "y": 110,
+      "width": 260,
+      "height": 70,
+      "shape": "rounded",
+      "fill": "#e6f4ec",
+      "stroke": "#68a485",
+      "fontColor": "#20334b",
+      "fontSize": 26,
+      "strokeWidth": 2
+    },
+    {
+      "id": "codex",
+      "label": "Codex CLI / desktop",
+      "x": 820,
+      "y": 200,
+      "width": 260,
+      "height": 70,
+      "shape": "rounded",
+      "fill": "#e6f4ec",
+      "stroke": "#68a485",
+      "fontColor": "#20334b",
+      "fontSize": 24,
+      "strokeWidth": 2
+    },
+    {
+      "id": "gemini",
+      "label": "Gemini CLI",
+      "x": 820,
+      "y": 290,
+      "width": 260,
+      "height": 70,
+      "shape": "rounded",
+      "fill": "#e6f4ec",
+      "stroke": "#68a485",
+      "fontColor": "#20334b",
+      "fontSize": 26,
+      "strokeWidth": 2
+    }
+  ],
+  "edges": [
+    {
+      "source": "skill",
+      "target": "adapter",
+      "orthogonal": true,
+      "strokeWidth": 2
+    },
+    {
+      "source": "adapter",
+      "target": "copilot",
+      "orthogonal": true,
+      "strokeWidth": 2
+    },
+    {
+      "source": "adapter",
+      "target": "claude",
+      "orthogonal": true,
+      "strokeWidth": 2
+    },
+    {
+      "source": "adapter",
+      "target": "codex",
+      "orthogonal": true,
+      "strokeWidth": 2
+    },
+    {
+      "source": "adapter",
+      "target": "gemini",
+      "orthogonal": true,
+      "strokeWidth": 2
+    }
+  ]
+}

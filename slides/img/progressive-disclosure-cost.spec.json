@@ -1,0 +1,118 @@
+{
+  "title": "Load skill content and resources only when needed",
+  "description": "The host exposes a skill catalog. Invocation loads the skill body. References enter context when read, not just linked. A script can execute without a source read; its invocation and returned summary still contribute context. Loaded content can persist across turns.",
+  "background": "none",
+  "padding": 20,
+  "nodes": [
+    {
+      "id": "metadata",
+      "label": "DISCOVER\nName + description",
+      "x": 20,
+      "y": 35,
+      "width": 260,
+      "height": 100,
+      "shape": "rounded",
+      "fill": "#eaf2ff",
+      "stroke": "#6b96cf",
+      "fontColor": "#20334b",
+      "fontSize": 28,
+      "strokeWidth": 2
+    },
+    {
+      "id": "body",
+      "label": "INVOKE\nSKILL.md body",
+      "x": 380,
+      "y": 35,
+      "width": 260,
+      "height": 100,
+      "shape": "rounded",
+      "fill": "#f1ebfb",
+      "stroke": "#9b7ac3",
+      "fontColor": "#20334b",
+      "fontSize": 28,
+      "strokeWidth": 2
+    },
+    {
+      "id": "reference",
+      "label": "READ AS NEEDED\nReference files",
+      "x": 790,
+      "y": 35,
+      "width": 290,
+      "height": 100,
+      "shape": "rounded",
+      "fill": "#fff3db",
+      "stroke": "#c59b4f",
+      "fontColor": "#20334b",
+      "fontSize": 26,
+      "strokeWidth": 2
+    },
+    {
+      "id": "script",
+      "label": "EXECUTE\nBundled scripts",
+      "x": 380,
+      "y": 220,
+      "width": 260,
+      "height": 100,
+      "shape": "rounded",
+      "fill": "#f3f6fa",
+      "stroke": "#b5c1cf",
+      "fontColor": "#20334b",
+      "fontSize": 28,
+      "strokeWidth": 2
+    },
+    {
+      "id": "result",
+      "label": "RETURN\nFocused output",
+      "x": 790,
+      "y": 220,
+      "width": 290,
+      "height": 100,
+      "shape": "rounded",
+      "fill": "#e6f4ec",
+      "stroke": "#68a485",
+      "fontColor": "#20334b",
+      "fontSize": 28,
+      "strokeWidth": 2
+    },
+    {
+      "id": "unloaded",
+      "label": "Other skill bodies\ncan stay unloaded",
+      "x": 20,
+      "y": 220,
+      "width": 260,
+      "height": 100,
+      "shape": "rectangle",
+      "fill": "none",
+      "stroke": "none",
+      "fontColor": "#20334b",
+      "fontSize": 24,
+      "strokeWidth": 2
+    }
+  ],
+  "edges": [
+    {
+      "source": "metadata",
+      "target": "body",
+      "orthogonal": true,
+      "strokeWidth": 2
+    },
+    {
+      "source": "body",
+      "target": "reference",
+      "orthogonal": true,
+      "strokeWidth": 2
+    },
+    {
+      "source": "body",
+      "target": "script",
+      "orthogonal": true,
+      "strokeWidth": 2
+    },
+    {
+      "source": "script",
+      "target": "result",
+      "orthogonal": true,
+      "strokeWidth": 2
+    }
+  ]
+}

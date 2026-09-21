@@ -1,0 +1,12 @@
+name: csv-analysis-eval
+description: Deterministic trigger coverage for the presentation fixture.
+skill: csv-analysis
+version: "1.0"
+config:
+  trials_per_task: 1
+  timeout_seconds: 30
+  parallel: false
+  executor: mock
+  model: mock-model
+tasks:
+  - "tasks/*.yaml"

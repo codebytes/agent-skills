@@ -1,0 +1,140 @@
+{
+  "title": "Separate worker context with a bounded result",
+  "description": "A main thread delegates a bounded brief. The worker receives the task plus host-provided startup context and keeps its own intermediate reads and tool trace. A requested concise result and evidence return to the parent. Host metadata also contributes context; forks and resumed workers can inherit history.",
+  "background": "none",
+  "padding": 20,
+  "nodes": [
+    {
+      "id": "main-title",
+      "label": "MAIN CONVERSATION",
+      "x": 20,
+      "y": 0,
+      "width": 370,
+      "height": 45,
+      "shape": "rectangle",
+      "fill": "none",
+      "stroke": "none",
+      "fontColor": "#20334b",
+      "fontSize": 26,
+      "strokeWidth": 2
+    },
+    {
+      "id": "worker-title",
+      "label": "SUBAGENT EXECUTION",
+      "x": 720,
+      "y": 0,
+      "width": 360,
+      "height": 45,
+      "shape": "rectangle",
+      "fill": "none",
+      "stroke": "none",
+      "fontColor": "#20334b",
+      "fontSize": 26,
+      "strokeWidth": 2
+    },
+    {
+      "id": "brief",
+      "label": "Bounded task brief\nGoal + constraints",
+      "x": 20,
+      "y": 70,
+      "width": 370,
+      "height": 96,
+      "shape": "rounded",
+      "fill": "#eaf2ff",
+      "stroke": "#6b96cf",
+      "fontColor": "#20334b",
+      "fontSize": 28,
+      "strokeWidth": 2
+    },
+    {
+      "id": "startup",
+      "label": "Task + host context\nRules, tools, skills",
+      "x": 720,
+      "y": 70,
+      "width": 360,
+      "height": 96,
+      "shape": "rounded",
+      "fill": "#f1ebfb",
+      "stroke": "#9b7ac3",
+      "fontColor": "#20334b",
+      "fontSize": 28,
+      "strokeWidth": 2
+    },
+    {
+      "id": "work",
+      "label": "Separate work history\nReads + tool calls",
+      "x": 720,
+      "y": 220,
+      "width": 360,
+      "height": 96,
+      "shape": "rounded",
+      "fill": "#fff3db",
+      "stroke": "#c59b4f",
+      "fontColor": "#20334b",
+      "fontSize": 28,
+      "strokeWidth": 2
+    },
+    {
+      "id": "result",
+      "label": "Result + evidence\nAdded to parent",
+      "x": 20,
+      "y": 220,
+      "width": 370,
+      "height": 96,
+      "shape": "rounded",
+      "fill": "#e6f4ec",
+      "stroke": "#68a485",
+      "fontColor": "#20334b",
+      "fontSize": 28,
+      "strokeWidth": 2
+    },
+    {
+      "id": "delegate-label",
+      "label": "Delegate",
+      "x": 455,
+      "y": 97,
+      "width": 200,
+      "height": 42,
+      "shape": "rounded",
+      "fill": "#ffffff",
+      "stroke": "none",
+      "fontColor": "#20334b",
+      "fontSize": 26,
+      "strokeWidth": 2
+    },
+    {
+      "id": "return-label",
+      "label": "Return summary",
+      "x": 435,
+      "y": 247,
+      "width": 245,
+      "height": 42,
+      "shape": "rounded",
+      "fill": "#ffffff",
+      "stroke": "none",
+      "fontColor": "#20334b",
+      "fontSize": 26,
+      "strokeWidth": 2
+    }
+  ],
+  "edges": [
+    {
+      "source": "brief",
+      "target": "startup",
+      "orthogonal": true,
+      "strokeWidth": 2
+    },
+    {
+      "source": "startup",
+      "target": "work",
+      "orthogonal": true,
+      "strokeWidth": 2
+    },
+    {
+      "source": "work",
+      "target": "result",
+      "orthogonal": true,
+      "strokeWidth": 2
+    }
+  ]
+}

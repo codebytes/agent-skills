@@ -1,12 +1,16 @@
 # Document Tools Demo Plugin
 
 This compact plugin is the live example used in the "Agent Skills, Plugins &
-Marketplace" talk. It demonstrates **one canonical skill**, a portable Agent
-Plugins 1.0 package, thin native-host adapters, and a checkable input/output
-example. Guidance was checked on **September 20, 2026**.
+Marketplace" talk. It starts with **a one-file skill**, then shows a skill with
+resources, a portable Agent Plugins 1.0 package, thin native-host adapters, and
+a checkable input/output example. Guidance was checked on **September 21, 2026**.
 
 > This is a presentation fixture. Maintained reusable skills live in
 > [codebytes/skills](https://github.com/codebytes/skills).
+
+Walk the checked-in fixture rather than reconstructing it from abbreviated slide
+snippets. The main demo validates locally before distribution; publication,
+installation, and model-backed evaluations are separate explicit actions.
 
 ## Structure
 
@@ -25,9 +29,46 @@ document-tools/
 │   ├── sample.csv
 │   └── sample-report.md
 └── skills/
+    ├── release-note/
+    │   └── SKILL.md            # Entire minimal example; nothing else needed
     └── csv-analysis/
-        └── SKILL.md            # The only skill implementation
+        ├── SKILL.md            # Resource-backed example
+        ├── scripts/profile_csv.py
+        ├── references/methodology.md
+        ├── assets/report.md
+        └── evals/csv-analysis/eval.yaml  # Vally capability cases
 ```
+
+## Start Small, Then Add Resources
+
+The complete `release-note` skill is only seven lines:
+
+```markdown
+---
+name: release-note
+description: Write a short release note from a change summary.
+---
+
+Write two sentences: what changed, then why it matters.
+Use plain language and only the facts the user supplied.
+```
+
+After loading the package in your chosen host, ask:
+
+```text
+Use release-note: users can now export search results to CSV for spreadsheet analysis.
+```
+
+There is no script, skill-local test, eval, runtime manifest, or extra configuration
+inside that skill folder. The enclosing plugin is just one way to distribute it.
+The plain instructions operate on text already supplied in the request.
+
+The separate `csv-analysis` skill is the next example: it needs deterministic
+calculations, supporting methodology, and a report template. Its optional Waza/
+Vally examples illustrate how to evaluate a growing workflow; they are not a
+requirement to create or use the minimal skill.
+
+## Catalogs
 
 The repository root also contains three catalog entry points:
 
@@ -54,12 +95,12 @@ selector; inspect any old installation separately before removing it.
 
 | Host | Entry point | Demo capabilities |
 |------|-------------|-------------------|
-| Copilot CLI | Root `plugin.json` | Skill, namespaced agent, namespaced hook |
-| VS Code with Copilot | Root `plugin.json` | Skill and supported/enabled Copilot extensions |
-| Claude Code | `.claude-plugin/plugin.json` | Skill and the explicitly referenced shared agent |
-| Codex CLI / desktop | Root `plugin.json` | Skill; not the Copilot agent or hook |
-| Gemini CLI | `gemini-extension.json` | Skill; not the Copilot/Claude agent or hook |
-| Rider Skills Manager | Local source `plugins/document-tools/skills/` | Skill only, for supported AI Assistant agents |
+| Copilot CLI | Root `plugin.json` | Both skills, namespaced agent, namespaced hook |
+| VS Code with Copilot | Root `plugin.json` | Both skills and supported/enabled Copilot extensions |
+| Claude Code | `.claude-plugin/plugin.json` | Both skills and the explicitly referenced shared agent |
+| Codex CLI / desktop | Root `plugin.json` | Both skills; not the Copilot agent or hook |
+| Gemini CLI | `gemini-extension.json` | Both skills; not the Copilot/Claude agent or hook |
+| Rider Skills Manager | Local source `plugins/document-tools/skills/` | Selected skills only, for supported AI Assistant agents |
 | CLI in Rider's terminal | The chosen CLI's entry point above | CLI capabilities; not proof of IDE-native package support |
 
 The root manifest's exact `$schema` selects Agent Plugins 1.0. It has no
@@ -96,17 +137,61 @@ Remote installs see the last published commit, not uncommitted local changes.
 Use the local paths for rehearsing edits. Do not register both local and remote
 catalogs under the same name and assume they are interchangeable.
 
+### Verify Locally Before Publishing
+
+After reviewing the code, run the deterministic profiler from the repository
+root:
+
+```bash
+SKILL=plugins/document-tools/skills/csv-analysis
+python3 "$SKILL/scripts/profile_csv.py" \
+  plugins/document-tools/examples/sample.csv --delimiter ,
+python3 -m unittest discover -s tests -v
+```
+
+The script uses only Python's standard library. It returns aggregate JSON, not
+the input rows, and it does not write files or contact a server. Read the linked
+methodology for missing markers, sample standard deviation, type inference,
+and the exact 100 MiB sampling boundary. The report template loads separately
+when formatting; ordinary links do not automatically inject target contents.
+
+Next use the session-only preview below, inspect invocation, and compare the
+actual result. Static checks and a correct profiler do not prove model routing.
+Keep the expected report as an honestly labeled offline fallback.
+
 ### Copilot CLI
 
 For a session-only local preview:
 
 ```bash
-copilot --plugin-dir ./plugins/document-tools
+PLUGIN="$PWD/plugins/document-tools"
+copilot --plugin-dir "$PLUGIN" plugin list
+copilot --plugin-dir "$PLUGIN" skill list
+copilot --plugin-dir "$PLUGIN"
 ```
 
-In that session, inspect `/skills info csv-analysis` and `/agent`. The
-standalone `copilot skill list` command may omit session-only `--plugin-dir`
-mounts; check inside the session instead.
+The first two commands verify the mount without starting a model conversation.
+The last starts the interactive preview. Each new process needs `--plugin-dir`;
+a plain `copilot skill list` in another terminal does not inherit that mount.
+
+Inside the preview, open `/skills` and inspect the **exact listed name**.
+Same-name skills can be namespaced rather than appearing under the bare name.
+On the verified Copilot CLI 1.0.87-0 setup, an installed Codebytes collection
+causes these distinct entries:
+
+- `document-tools:csv-analysis` - this local demo.
+- `codebytes-skills:csv-analysis` - the separately installed collection.
+- `release-note` - this demo's unique one-file skill.
+
+In that setup use `/skills info document-tools:csv-analysis` and
+`/skills info release-note`. In a clean setup, use whatever identifier `/skills`
+shows instead. Check that each source path points into the intended
+`plugins/document-tools/skills/` directory. `/agent` inspects the optional agent.
+
+If discovery still differs, confirm `copilot --version`, that `copilot --help`
+documents `--plugin-dir`, and that the terminal is in the edited checkout.
+The plugin listing should show `document-tools` version `1.3.0` as enabled and
+external; `skill list --json` provides source paths. No global install is needed.
 
 For a marketplace installation:
 
@@ -123,7 +208,7 @@ remote catalog. To update a Git-backed installation:
 
 ```bash
 copilot plugin marketplace update codebytes-agent-skills
-copilot plugin update document-tools
+copilot plugin update document-tools@codebytes-agent-skills
 ```
 
 Catalog refresh and installed-plugin update are distinct. Prefer this
@@ -327,9 +412,13 @@ Use this prompt in the chosen host, applying its explicit skill-invocation
 syntax where available:
 
 ```text
-Use csv-analysis to profile plugins/document-tools/examples/sample.csv.
+Use the csv-analysis skill from document-tools to profile
+plugins/document-tools/examples/sample.csv.
 Return a Markdown report. Do not modify or upload the input.
 ```
+
+For Copilot, substitute the exact skill identifier from `/skills`, for example
+`document-tools:csv-analysis` when a same-name installed skill causes namespacing.
 
 Compare measured facts with [sample-report.md](examples/sample-report.md):
 
@@ -337,11 +426,31 @@ Compare measured facts with [sample-report.md](examples/sample-report.md):
 - One missing salary and one missing start date: **48/50 cells = 96% complete**.
 - Numeric statistics exclude missing values and use **sample** standard deviation.
 - Sampling, encoding, and calculation failures must be reported, not hidden.
+- Currency, comparative age claims, and tenure require additional metadata;
+  the reference report does not infer them from column names or old dates.
 
 Installation, enabled state, and invocation are separate checks. An agent may
 not automatically choose the skill, and same-name local skills or policy can
 change what loads. Keep the expected report as a live-demo fallback rather
 than claiming an unobserved model run succeeded.
+
+## Quality Layers
+
+The resource-backed CSV example aligns with `codebytes/skills` without
+duplicating its managed distribution repository. These quality tools are
+optional, and the minimal `release-note` skill intentionally has none of this
+scaffolding:
+
+| Layer | Location | What it establishes |
+|---|---|---|
+| Deterministic checks | Root `tests/` | Counts, scripts, errors, input preservation, package coherence |
+| Waza mock trigger suite | Root `evals/csv-analysis/` | Heuristic positive/negative routing coverage |
+| Vally capability spec | Skill-local `evals/csv-analysis/` | Opt-in agent execution, invocation, and rubric evidence |
+
+See [quality setup and commands](../../evals/README.md). A mock trigger pass is
+not a real model selection result; Vally's prompt judge is not a sandbox or a
+substitute for exact formula checks. The slide examples name which layer ran.
+Review tool versions and obtain approval before starting agent/judge calls.
 
 ## Validation
 

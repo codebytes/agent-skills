@@ -1,0 +1,15 @@
+id: negative-trigger-002
+name: Reject database queries
+description: "DO NOT USE FOR: querying databases."
+tags: [negative-trigger]
+inputs:
+  prompt: "Connect to my production database and execute a SQL query."
+expected:
+  should_trigger: false
+graders:
+  - type: trigger
+    name: does-not-trigger-database-query
+    config:
+      skill_path: plugins/document-tools/skills/csv-analysis/SKILL.md
+      mode: negative
+      threshold: 0.9
