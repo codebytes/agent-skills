@@ -288,8 +288,12 @@ class DemoConfigurationTests(unittest.TestCase):
         self.assertLess(source.index("## Review Before You Load"), source.index("copilot --plugin-dir"))
         self.assertLess(source.index("## Verify the Result"), source.index("## Declare the Catalog"))
         self.assertLess(source.index("# Reference Appendix"), source.index("## Discovery Paths"))
-        self.assertLess(source.index("# <!-- fit --> Questions?"), source.index("## Connect with Chris Ayers"))
-        self.assertLess(source.index("## Connect with Chris Ayers"), source.index("# Reference Appendix"))
+        self.assertLess(source.index("# <!-- fit --> Questions?"), source.index("# Thank You!"))
+        self.assertLess(source.index("# Thank You!"), source.index("# Reference Appendix"))
+        closing = source.split("# Thank You!", 1)[1].split("\n---\n", 1)[0]
+        self.assertIn("https://chris-ayers.com/agent-skills/", closing)
+        self.assertIn("https://agentskills.io/specification", closing)
+        self.assertNotIn("Azure Well-Architected", closing)
 
 
 if __name__ == "__main__":

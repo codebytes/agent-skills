@@ -14,8 +14,8 @@ loading. It compares GitHub Copilot and Claude Code, including shared `AGENTS.md
 guidance, then introduces a one-file `release-note` skill before the resource-backed
 CSV example. Waza/Vally quality checks are an optional next step, not prerequisites
 for the minimal skill. One package proceeds through verification and distribution.
-The main story closes with **Questions?**, followed by the presenter's contact
-slide before the reference appendix.
+The main story closes with **Questions?**, followed by a **Thank You!** slide
+with the presenter's contact information and talk links, before the appendix.
 The authoring section makes the skill naming contract visible, including the
 1–64 character limit, lowercase Unicode alphanumerics/hyphens, edge and repeated
 hyphen restrictions, and matching the parent directory.

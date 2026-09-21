@@ -1001,35 +1001,40 @@ Build one skill.<br>Test it in two hosts.
 
 ---
 
-<!-- _class: links -->
-<!-- _paginate: skip -->
+# Thank You!
 
-## Connect with Chris Ayers
-
-Principal Software Engineer · Azure EngOps AzRel · Microsoft
+<!-- _class: small -->
 
 <div class="columns">
 <div>
 
-### Connect
+## Links
 
-- **Bluesky:** [@chris-ayers.com](https://bsky.app/profile/chris-ayers.com)
-- **LinkedIn:** [chris-l-ayers](https://linkedin.com/in/chris-l-ayers/)
-- **Mastodon:** [@Chrisayers@hachyderm.io](https://hachyderm.io/@Chrisayers)
+- [Talk slides and demo](https://chris-ayers.com/agent-skills/)
+- [Codebytes skills catalog](https://chris-ayers.com/skills/)
+- [Agent Skills specification](https://agentskills.io/specification)
+- [Agent Plugins specification](https://agent-plugins.org/specification)
+- [Skill quality: Waza + Vally](https://github.com/codebytes/agent-skills/blob/main/evals/README.md)
 
 </div>
 <div>
 
-### Code and writing
+## Chris Ayers
 
-- **GitHub:** [Codebytes](https://github.com/codebytes)
-- **Blog:** [chris-ayers.com](https://chris-ayers.com/)
-- **Talk:** [Slides and demo](https://chris-ayers.com/agent-skills/)
+_Principal Software Engineer_
+_Azure CXP AzRel_
+_Microsoft_
+
+<i class="fa-brands fa-bluesky"></i> BlueSky: [@chris-ayers.com](https://bsky.app/profile/chris-ayers.com)  
+<i class="fa-brands fa-linkedin"></i> LinkedIn: [chris\-l\-ayers](https://linkedin.com/in/chris-l-ayers/)  
+<i class="fa fa-window-maximize"></i> Blog: [https://chris-ayers\.com/](https://chris-ayers.com/)  
+<i class="fa-brands fa-github"></i> GitHub: [Codebytes](https://github.com/codebytes)  
+<i class="fa-brands fa-mastodon"></i> Mastodon: [@Chrisayers@hachyderm.io](https://hachyderm.io/@Chrisayers)
+~~<i class="fa-brands fa-twitter"></i> Twitter: [@Chris_L_Ayers](https://twitter.com/Chris_L_Ayers)~~  
 
 </div>
-</div>
 
-<!-- Leave these contact links visible after questions. They reuse the presenter's public profiles from the bio; the talk link provides the published slides and repository entry point. The reference appendix follows for optional discussion. -->
+</div>
 
 ---
 
