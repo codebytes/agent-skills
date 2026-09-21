@@ -469,5 +469,5 @@ host's runtime permissions. In Rider, also record the IDE version, integration,
 agent/harness, scope, and skill source, then verify actual invocation and output.
 Do not install or enable the demo globally as an incidental test.
 
-See the [repository compatibility baseline and official sources](../../README.md#compatibility-baseline)
+See the [repository compatibility baseline and official sources](../../docs/talk-guide.md#compatibility-baseline)
 for the current standards, host caveats, and dated announcements.
