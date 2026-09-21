@@ -930,7 +930,7 @@ copilot plugin install document-tools@codebytes-agent-skills
 
 **Portable content. Host-specific discovery, tools, and permissions.**
 
-<p class="sources"><a href="https://agentskills.io/specification">Skill format</a> · <a href="https://agent-plugins.org/specification">Package format</a> · <a href="https://github.com/codebytes/agent-skills#compatibility-baseline">Host matrix</a></p>
+<p class="sources"><a href="https://agentskills.io/specification">Skill format</a> · <a href="https://agent-plugins.org/specification">Package format</a> · <a href="https://github.com/codebytes/agent-skills/blob/main/docs/talk-guide.md#compatibility-baseline">Host matrix</a></p>
 
 <!-- This is the mainline portability summary. Detailed paths, native adapters, IDE procedures, and release-specific boundaries are in the appendix. Do not imply that Claude or Gemini's participation in an ecosystem proves a particular portable loader implementation. One canonical source does not mean all hosts expose identical capabilities. -->
 
@@ -1337,6 +1337,6 @@ Review changes, update deliberately, then inspect the new session's source.
 - [Waza specification and grader guide](https://microsoft.github.io/waza/guides/eval-yaml/)
 - [Vally CLI evaluation reference](https://microsoft.github.io/vally/reference/cli/eval)
 
-**[Full compatibility baseline and dated announcements](https://github.com/codebytes/agent-skills#compatibility-baseline)**
+**[Full compatibility baseline and dated announcements](https://github.com/codebytes/agent-skills/blob/main/docs/talk-guide.md#compatibility-baseline)**
 
-<!-- Prefer current host documentation for behavior and version-pinned announcements for historical dates. The README preserves the Claude, Gemini, Rider, and API-specific links as well as the managed collection's references. Links in the ordinary slides and PDF are available without opening presenter notes. -->
+<!-- Prefer current host documentation for behavior and version-pinned announcements for historical dates. The talk guide preserves the Claude, Gemini, Rider, and API-specific links as well as the managed collection's references. Links in the ordinary slides and PDF are available without opening presenter notes. -->
