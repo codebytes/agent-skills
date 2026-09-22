@@ -295,6 +295,21 @@ class DemoConfigurationTests(unittest.TestCase):
         self.assertIn("https://agentskills.io/specification", closing)
         self.assertNotIn("Azure Well-Architected", closing)
 
+    def test_presenter_identity_and_page_metadata(self):
+        source = (ROOT / "slides/Slides.md").read_text(encoding="utf-8")
+        frontmatter = source.split("---", 2)[1]
+        self.assertIn("title: Agent Skills, Plugins & Marketplace\n", frontmatter)
+        self.assertIn("footer: 'Chris Ayers - https://chris-ayers.com'\n", frontmatter)
+        cover = source.split("\n---\n")[1]
+        bio = source.split("## Chris Ayers", 1)[1].split("\n---\n", 1)[0]
+        closing = source.split("# Thank You!", 1)[1].split("\n---\n", 1)[0]
+        for name, block in (("cover", cover), ("bio", bio), ("closing", closing)):
+            with self.subTest(presenter_block=name):
+                for identity in ("Principal Software Engineer", "Azure EngOps AzRel", "Microsoft"):
+                    self.assertIn(identity, block)
+                self.assertNotIn("Azure CXP", block)
+        self.assertIn("**Chris Ayers**, Principal Software Engineer", (ROOT / "README.md").read_text())
+
 
 if __name__ == "__main__":
     unittest.main()
