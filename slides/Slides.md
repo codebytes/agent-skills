@@ -1,9 +1,10 @@
 ---
 marp: true
+title: Agent Skills, Plugins & Marketplace
 theme: custom-default
 paginate: true
 math: mathjax
-footer: '@Chris_L_Ayers - https://chris-ayers.com'
+footer: 'Chris Ayers - https://chris-ayers.com'
 ---
 
 # Agent Skills,<br><span>Plugins & Marketplace</span>
@@ -726,6 +727,8 @@ Reusable skills. Optional extensions. A repeatable check.
 
 ---
 
+<!-- _class: small -->
+
 ## Preview This Fixture Locally
 
 From the repository root, after source review:
@@ -861,6 +864,8 @@ vally eval --eval-spec "$SPEC" --skill-dir "$SKILL" \
 <!-- Show the relationships before showing JSON. This diagram depicts the actual one-plugin fixture, not additional plugins the repository does not contain. Larger catalogs can list many local or external packages. The catalog name, repository name, plugin name, and skill name are different identifiers. -->
 
 ---
+
+<!-- _class: small -->
 
 ## Declare the Catalog Once
 
@@ -1022,7 +1027,7 @@ Build one skill.<br>Test it in two hosts.
 ## Chris Ayers
 
 _Principal Software Engineer_
-_Azure CXP AzRel_
+_Azure EngOps AzRel_
 _Microsoft_
 
 <i class="fa-brands fa-bluesky"></i> BlueSky: [@chris-ayers.com](https://bsky.app/profile/chris-ayers.com)  
@@ -1179,6 +1184,8 @@ Keep inputs unchanged; report measured facts and caveats.
 
 ---
 
+<!-- _class: small -->
+
 ## Two Servers in One `mcp.json`
 
 Illustrative plugin-root configuration—not part of `document-tools`:
@@ -1218,6 +1225,8 @@ Illustrative plugin-root configuration—not part of `document-tools`:
 <!-- The fixture hook emits both Copilot CLI additionalContext and the VS Code hookSpecificOutput envelope. It performs no writes or network calls. It can run for a different subagent too. Claude, Codex, and Gemini are not configured to load this hook. This is why the main demo does not use a hook notification as activation evidence. -->
 
 ---
+
+<!-- _class: small -->
 
 ## Version Labels Are Not Revision Pins
 
